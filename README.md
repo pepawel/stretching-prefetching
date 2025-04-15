@@ -4,7 +4,8 @@ This is a demonstration of how large the prefetched data can be when using Signe
 
 [![Watch the video](https://img.youtube.com/vi/6cixE1x5AeU/maxresdefault.jpg)](https://www.youtube.com/watch?v=6cixE1x5AeU)
 
-You can experience the [live demo](https://www.planujemywesele.pl/sxg-tests/offline-abuse)
+You can experience the [live demo](https://www.planujemywesele.pl/sxg-tests/offline-abuse), read a
+[blog post](https://www.pawelpokrywka.com/p/stretching-google-prefetching) about it,
 or deploy the demo yourself to your website (described later).
 
 ## How It Works
