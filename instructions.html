@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Warning: PoC code quality -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airplane mode demo</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          max-width: 600px;
+          margin: 20px auto;
+          padding: 40px;
+          background-color: #f9f9f9;
+      }
+      h1 {
+          text-align: center;
+      }
+      .error {
+          color: red;
+          border: 1px solid red;
+          padding: 10px;
+          background-color: #ffe6e6;
+          border-radius: 5px;
+          margin: 10px 0;
+          text-align: center;
+      }
+      .task {
+          margin: 10px 0;
+          padding: 10px;
+          background-color: white;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+      }
+      .buttons {
+          margin-top: 5px;
+      }
+      button, .button-link {
+          margin-right: 5px;
+          padding: 5px 10px;
+          border: none;
+          background-color: #007bff;
+          color: white;
+          border-radius: 3px;
+          cursor: pointer;
+          text-decoration: none;
+          display: inline-block;
+          text-align: center;
+          font-size: 14px;
+          font-family: inherit;
+      }
+      button:hover, .button-link:hover {
+          background-color: #0056b3;
+      }
+
+      button:disabled {
+          background-color: gray !important;
+          cursor: not-allowed;
+          opacity: 0.6;
+      }
+
+      button:disabled:hover {
+          background-color: gray; /* Prevent hover effect */
+      }
+      .task img {
+          display: block;
+          max-width: 100%;
+          margin: 10px auto;
+          border-radius: 5px;
+      }
+      .progress-container {
+          width: 100%;
+          background-color: #ddd;
+          border-radius: 5px;
+          margin-top: 10px;
+          overflow: hidden;
+      }
+      .progress-bar {
+          height: 10px;
+          width: 0;
+          background-color: #007bff;
+          border-radius: 5px;
+          transition: width 0.3s ease-in-out;
+      }
+      .hidden {
+          display: none;
+      }
+      #googlePhraseInfo {
+          margin-top: 10px;
+      }
+      #googlePhraseContent {
+          margin-top: 5px;
+          font-size: 14px;
+          color: gray;
+          border: solid gray;
+          padding: 5px;
+      }
+  </style>
+</head>
+<body>
+<h1>Airplane mode demo</h1>
+
+<p>This short experiment shows something curious that happens when you go offline.<br>
+  Keep this page open in a regular browser window. A separate Incognito window will be used to ensure a clean slate, with no prior visits or cache.</p>
+
+<ul>
+  <li>Use a recent version of the <strong>original</strong> Google Chrome (not on iOS)</li>
+  <li>Use a stable internet connection (go offline only when explicitly asked to do so).</li>
+  <li>Make sure your system has <strong>plenty of free memory</strong> — close unused apps and browser tabs if needed. This part is important, as the demo won't be fun otherwise.</li>
+</ul>
+
+<p>Follow the steps carefully.<br>
+  Once you’re offline, see if anything surprises you.</p>
+
+<div class="error hidden" id="iPadError">iPad detected. This demo does not work on iPhone and iPad devices.</div>
+<div class="error hidden" id="iPhoneError">iPhone detected. This demo does not work on iPhone and iPad devices.</div>
+<div class="error hidden" id="notChromeError">Chrome not detected. Please open this page in Google Chrome.</div>
+<div class="error hidden" id="offlineError">Seems you are offline. Please go online and <a href="" style="color: red;">refresh</a> the page.</div>
+
+<ol id="taskList">
+  <li class="task hidden" id="step1">Close all incognito windows, if any. If your current window is in incognito mode, reopen the page in normal mode. <div class="buttons"><button id="step1Button">Done</button></div></li>
+  <li class="task hidden" id="step2">Keep this window open during the demonstration. <div class="buttons"><button id="step2Button">Fine</button></div></li>
+  <li class="task hidden" id="step3">
+    Open an incognito window and search Google (do not use Bing, DuckDuckGo, etc.) by pasting the phrase copied here. <strong>Do not visit the found page</strong>!<br>
+    <div class="buttons" style="display: inline-block"><button id="step3Button">Copy the search phrase</button></div>
+    <span id="step3Message" style="font-style: italic"></span>
+    <div id="googlePhrase" class="hidden">
+      <div id="googlePhraseInfo">You can also copy it from here:</div>
+      <div id="googlePhraseContent"></div>
+    </div>
+  </li>
+  <li class="task hidden" id="step4">
+    Do you see a similar result? The CODE will be different.
+    <img src="snippet.png" alt="Screenshot of Google search snippet">
+    <div class="buttons">
+      <button id="step4YesButton">Yes, I do</button>
+      <button id="step4NoButton" style="background-color: red">No, I don't</button>
+    </div>
+  </li>
+  <li class="task hidden" id="step4a">
+    <strong>Still, do not visit the page</strong>. Type the 4-digit CODE you see there into the input field below.
+    <div style="display: flex; align-items: center; gap: 5px; margin-top: 5px;">
+      <input id="secretCode" type="password" placeholder="0000" pattern="[0-9]{4}" maxlength="4" inputmode="numeric" autocomplete="off" required
+             style="border: 1px solid #007bff; padding: 5px; border-radius: 3px; font-size: 14px;">
+      <button id="step4aButton">OK</button>
+    </div>
+  </li>
+  <li class="task hidden" id="step5">
+    Please wait...
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </li>
+  <li class="task hidden" id="step6">Enable airplane mode or disconnect this device from the internet.<br><br><span style="font-style: italic" id="waitingForOffline">Waiting...</span></li>
+  <li class="task hidden" id="step7">
+    Click the link you found in Google in the incognito window. <strong>Did you notice anything unusual?</strong> Tip: Pay attention to the small details.<br><br>If things look normal, close the incognito window and start again.
+    <div class="buttons"><a class="button-link" href="">Restart the demo</a></div>
+    <p>
+      If you are still having trouble making the demo work, please go online and refer to the explanation <a href="https://www.pawelpokrywka.com/p/stretching-google-prefetching" target="_blank">here</a>.
+    </p>
+  </li>
+</ol>
+
+<script>
+  // Browser detection library adjusted to not require ES modules.
+  // https://github.com/sibiraj-s/browser-dtector
+  /*
+    MIT License
+
+    Copyright (c) 2019 Sibiraj
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+   */
+  (()=>{var e={chrome:"Google Chrome",brave:"Brave",crios:"Google Chrome",edge:"Microsoft Edge",edg:"Microsoft Edge",edgios:"Microsoft Edge",fennec:"Mozilla Firefox",jsdom:"JsDOM",mozilla:"Mozilla Firefox",fxios:"Mozilla Firefox",msie:"Microsoft Internet Explorer",opera:"Opera",opios:"Opera",opr:"Opera",opt:"Opera",rv:"Microsoft Internet Explorer",safari:"Safari",samsungbrowser:"Samsung Browser",electron:"Electron"},o={android:"Android",androidTablet:"Android Tablet",cros:"Chrome OS",fennec:"Android Tablet",ipad:"IPad",ipod:"IPod",iphone:"IPhone",jsdom:"JsDOM",linux:"Linux",mac:"Macintosh",tablet:"Android Tablet",win:"Windows","windows phone":"Windows Phone",xbox:"Microsoft Xbox"},r=(e,o=-1)=>{let r=new RegExp(`^-?\\d+(?:.\\d{0,${o}})?`),i=Number(e).toString().match(r);return i?i[0]:null},i=()=>typeof window<"u"?window.navigator:null,n=class{userAgent;constructor(e){this.userAgent=e||i()?.userAgent||null}static get VERSION(){return"4.1.0"}parseUserAgent(n){let s={},a=n||this.userAgent||"",t=a.toLowerCase().replace(/\s\s+/g," "),c=/(edge)\/([\w.]+)/.exec(t)||/(edg)[/]([\w.]+)/.exec(t)||/(opr)[/]([\w.]+)/.exec(t)||/(opt)[/]([\w.]+)/.exec(t)||/(fxios)[/]([\w.]+)/.exec(t)||/(edgios)[/]([\w.]+)/.exec(t)||/(jsdom)[/]([\w.]+)/.exec(t)||/(samsungbrowser)[/]([\w.]+)/.exec(t)||/(electron)[/]([\w.]+)/.exec(t)||/(chrome)[/]([\w.]+)/.exec(t)||/(crios)[/]([\w.]+)/.exec(t)||/(opios)[/]([\w.]+)/.exec(t)||/(version)(applewebkit)[/]([\w.]+).*(safari)[/]([\w.]+)/.exec(t)||/(webkit)[/]([\w.]+).*(version)[/]([\w.]+).*(safari)[/]([\w.]+)/.exec(t)||/(applewebkit)[/]([\w.]+).*(safari)[/]([\w.]+)/.exec(t)||/(webkit)[/]([\w.]+)/.exec(t)||/(opera)(?:.*version|)[/]([\w.]+)/.exec(t)||/(msie) ([\w.]+)/.exec(t)||/(fennec)[/]([\w.]+)/.exec(t)||t.indexOf("trident")>=0&&/(rv)(?::| )([\w.]+)/.exec(t)||t.indexOf("compatible")<0&&/(mozilla)(?:.*? rv:([\w.]+)|)/.exec(t)||[],d=/(ipad)/.exec(t)||/(ipod)/.exec(t)||/(iphone)/.exec(t)||/(jsdom)/.exec(t)||/(windows phone)/.exec(t)||/(xbox)/.exec(t)||/(win)/.exec(t)||/(tablet)/.exec(t)||/(android)/.test(t)&&!1===/(mobile)/.test(t)&&["androidTablet"]||/(android)/.exec(t)||/(mac)/.exec(t)||/(linux)/.exec(t)||/(cros)/.exec(t)||[],l=c[5]||c[3]||c[1]||null,x=d[0]||null,w=c[4]||c[2]||null,p=i();"chrome"===l&&"function"==typeof p?.brave?.isBrave&&(l="brave"),l&&(s[l]=!0),x&&(s[x]=!0);let m=!!(s.tablet||s.android||s.androidTablet),g=!!(s.ipad||s.tablet||s.androidTablet),f=!!(s.android||s.androidTablet||s.tablet||s.ipad||s.ipod||s.iphone||s["windows phone"]),b=!!(s.cros||s.mac||s.linux||s.win),u=!!(s.brave||s.chrome||s.crios||s.opr||s.safari||s.edg||s.electron),h=!(!s.msie&&!s.rv),v=!(!s.chrome&&!s.crios),A=!!(s.fxios||s.fennec||s.mozilla),M=!!s.safari,O=!!(s.opera||s.opios||s.opr||s.opt),E=!!(s.edg||s.edge||s.edgios);return{name:e[l]??null,platform:o[x]??null,userAgent:a,version:w,shortVersion:w?r(parseFloat(w),2):null,isAndroid:m,isTablet:g,isMobile:f,isDesktop:b,isWebkit:u,isIE:h,isChrome:v,isFireFox:A,isSafari:M,isOpera:O,isEdge:E}}getBrowserInfo(){let e=this.parseUserAgent();return{name:e.name,platform:e.platform,userAgent:e.userAgent,version:e.version,shortVersion:e.shortVersion}}};window.BrowserDetector=n})();
+</script>
+<script>
+  function main() {
+    // If the pasted text contains a word followed by a colon, it may be treated as URL and escaped
+    // That's why it starts with a redundant "offline" word
+    const searchPhrase = `offline intitle:"need internet" site:${getTopLevelDomain()}`;
+    function el(id) { return document.getElementById(id) };
+    function show(id) { el(id).classList.remove('hidden')};
+    function hide(id) { el(id).classList.add('hidden')};
+    function ifPressed(id, callback, disableButton = true) {
+      const button = el(id);
+      button.addEventListener("click", () => {
+        callback(button);
+        if (disableButton) button.setAttribute('disabled', '');
+      });
+    }
+
+    function getTopLevelDomain(hostname = window.location.hostname) {
+      const hostParts = hostname.split('.');
+
+      // If we have at least 3 parts
+      if (hostParts.length >= 3) {
+        // Get the second-to-last component
+        const secondLastPart = hostParts[hostParts.length - 2];
+
+        // If the second-to-last part is 3 characters or less (like "co" in "example.co.uk")
+        if (secondLastPart.length <= 3) {
+          // Return last 3 parts
+          return hostParts.slice(-3).join('.');
+        }
+      }
+
+      // Otherwise return last 2 parts (or the whole hostname if it's a single part)
+      if (hostParts.length >= 2) {
+        return hostParts.slice(-2).join('.');
+      }
+
+      // Fallback for single-component hostnames (including localhost)
+      return hostname;
+    }
+
+    function animateProgressBar(duration, callback) {
+      const progressBar = document.getElementById('progressBar');
+
+      let startTime = Date.now();
+      let isPaused = false;
+
+      function updateProgress() {
+        if (isPaused) {
+          setTimeout(() => {
+            isPaused = false;
+            updateProgress();
+          }, Math.random() * 2000 + 500); // Pause for 500ms to 2500ms
+          return;
+        }
+
+        let currentTime = Date.now();
+        let elapsedTime = currentTime - startTime;
+        let progressPercent = Math.min((elapsedTime / duration) * 100, 100);
+
+        progressBar.style.width = progressPercent + '%';
+
+        if (progressPercent < 100) {
+          if (Math.random() < 0.2) { // 20% chance to pause
+            isPaused = true;
+          }
+          let randomInterval = Math.random() * 300 + 100; // Random interval between 100ms and 400ms
+          setTimeout(updateProgress, randomInterval);
+        } else if (callback && typeof callback === 'function') {
+          setTimeout(callback, 1000);
+        }
+      }
+
+      updateProgress();
+    }
+
+    function enableLastStep() {
+      el('waitingForOffline').innerText = 'Ok, we are offline.'
+      show('step7');
+      localStorage.setItem('offlineSxgTestRestart', 'true');
+    }
+
+    async function checkInternet(timeout = 3000) {
+      const controller = new AbortController();
+      const signal = controller.signal;
+
+      const url = "/sxg/resolve-status.js";
+
+      const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+      try {
+        const response = await fetch(url, {method: "POST", signal});
+
+        clearTimeout(timeoutId);
+
+        return true;
+      } catch (error) {
+        return false; // No internet or request timed out
+      }
+    }
+
+    function onOffline(callback, timeout, retryInterval) {
+      checkInternet(timeout).then(isConnected => {
+        if (!isConnected) return callback();
+        setTimeout(onOffline, retryInterval, callback, timeout, retryInterval);
+      });
+    }
+
+    const parsedUa = new BrowserDetector(window.navigator.userAgent).parseUserAgent();
+
+    if (parsedUa.platform === 'IPad') return show('iPadError');
+    if (parsedUa.platform === 'IPhone') return show('iPhoneError');
+    if (parsedUa.name != 'Google Chrome') return show('notChromeError');
+    if (!navigator.onLine) return show('offlineError');
+
+    let canBeOffline = false;
+    window.addEventListener("offline", () => {
+      if (canBeOffline) {
+        enableLastStep();
+      } else {
+        hide('taskList');
+        show('offlineError');
+      }
+    });
+
+    el('secretCode').addEventListener('keypress', function(e) {
+      // Prevent typing non-digit characters
+      if (!/^\d$/.test(e.key)) {
+        e.preventDefault();
+      }
+    });
+
+    show('step1');
+
+    ifPressed('step1Button', () => {
+      show('step2');
+    });
+
+    ifPressed('step2Button', () => {
+      show('step3');
+    });
+
+    ifPressed('step3Button', (button) => {
+      const msg = el('step3Message');
+      navigator.clipboard.writeText(searchPhrase)
+        .then(() => {
+          msg.style.display = 'none';
+          button.setAttribute('disabled', '');
+          el('googlePhraseContent').innerText = searchPhrase;
+          show('googlePhrase');
+          show('step4');
+        })
+        .catch(() => {
+          msg.innerText = 'Failed to copy the search phrase.';
+          msg.style.color = 'red';
+        });
+    }, false);
+
+    ifPressed('step4NoButton', () => {
+      alert("Make sure you pasted the correct search phrase.");
+    }, false);
+
+    ifPressed('step4YesButton', () => {
+      el('step4NoButton').setAttribute('disabled', '');
+      show('step4a');
+    });
+
+    ifPressed('step4aButton', () => {
+      const code = el('secretCode').value
+      const prefix = "The code is invalid.\n"
+      if (code.length == 0) return alert("Please provide the code.");
+      if (code.length != 4) return alert(prefix + "It should be 4-digits long.");
+      if (code == '0000') return alert(prefix + "You provided an example placeholder code.\nUse the actual code you see.");
+      if (code == '1234') return alert(prefix + "You provided an example code from the screenshot.\nUse the actual code you see.");
+      if (code != '0925') return alert(prefix);
+
+      el('step4aButton').setAttribute('disabled', '');
+      el('secretCode').disabled = true;
+      show('step5');
+      const restart = localStorage.getItem('offlineSxgTestRestart') || false;
+      let time = restart ? 30000 : 15000;
+      animateProgressBar(time, () => {
+        show('step6');
+        canBeOffline = true;
+        onOffline(enableLastStep, 4000, 2000);
+      });
+    }, false);
+  }
+
+  document.addEventListener('DOMContentLoaded', main);
+</script>
+</body>
+</html>
