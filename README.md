@@ -2,8 +2,9 @@
 
 This is a demonstration of how large the prefetched data can be when using Signed Exchanges (SXG).
 
-You can experience the [live demo](https://www.planujemywesele.pl/sxg-tests/offline-abuse),
-watch a [video recording](https://www.pawelpokrywka.com/p/stretching-google-prefetching),
+[![Watch the video](https://img.youtube.com/vi/6cixE1x5AeU/maxresdefault.jpg)](https://www.youtube.com/watch?v=6cixE1x5AeU)
+
+You can experience the [live demo](https://www.planujemywesele.pl/sxg-tests/offline-abuse)
 or deploy the demo yourself to your website (described later).
 
 ## How It Works
