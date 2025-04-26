@@ -4,7 +4,7 @@
   <!-- Warning: PoC code quality -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Airplane mode demo</title>
+  <title>Offline surprise demo: a Chrome browser prefetching experiment</title>
   <style>
       body {
           font-family: Arial, sans-serif;
@@ -86,7 +86,7 @@
           display: none;
       }
       #googlePhraseInfo {
-          margin-top: 10px;
+          margin-top: 21px;
       }
       #googlePhraseContent {
           margin-top: 5px;
@@ -95,71 +95,124 @@
           border: solid gray;
           padding: 5px;
       }
+      li>p {
+          margin-top: 0;
+      }
   </style>
 </head>
 <body>
-<h1>Airplane mode demo</h1>
+  <h1>Offline surprise demo: a Chrome browser prefetching experiment</h1>
 
-<p>This short experiment shows something curious that happens when you go offline.<br>
-  Keep this page open in a regular browser window. A separate Incognito window will be used to ensure a clean slate, with no prior visits or cache.</p>
+  <p>
+    This is a short experiment in browser behavior, <strong>not a network hack or a real airplane mode bypass</strong>.
+  </p>
+  <p>
+    It shows how Chrome can prepare a page in advance — even when you think you're offline — thanks to clever use of web
+    technologies.
+  </p>
+  <p>
+    Important:
+  </p>
+  <ul>
+    <li>Use a recent version of the <strong>original</strong> Google Chrome (not on iOS)</li>
+    <li>Keep a stable internet connection until you are <strong>explicitly asked</strong> to disconnect.</li>
+    <li>
+      Free up memory by closing unnecessary browser tabs and background apps.
+      Large resources are involved — <strong>low memory may cause the demo to fail</strong>.
+    </li>
+  </ul>
+  <p>
+    You can also read a full explanation
+    <a href="https://www.pawelpokrywka.com/p/stretching-google-prefetching" target="_blank" style="text-decoration: none;">here</a>
+    — but doing so beforehand will spoil the experience!
+  </p>
 
-<ul>
-  <li>Use a recent version of the <strong>original</strong> Google Chrome (not on iOS)</li>
-  <li>Use a stable internet connection (go offline only when explicitly asked to do so).</li>
-  <li>Make sure your system has <strong>plenty of free memory</strong> — close unused apps and browser tabs if needed. This part is important, as the demo won't be fun otherwise.</li>
-</ul>
+  <div class="error hidden" id="iPadError">iPad detected. This demo does not work on iPhone and iPad devices.</div>
+  <div class="error hidden" id="iPhoneError">iPhone detected. This demo does not work on iPhone and iPad devices.</div>
+  <div class="error hidden" id="notChromeError">Chrome not detected. Please open this page in Google Chrome.</div>
+  <div class="error hidden" id="offlineError">Seems you are offline. Please go online and <a href=""
+      style="color: red;">refresh</a> the page.</div>
 
-<p>Follow the steps carefully.<br>
-  Once you’re offline, see if anything surprises you.</p>
-
-<div class="error hidden" id="iPadError">iPad detected. This demo does not work on iPhone and iPad devices.</div>
-<div class="error hidden" id="iPhoneError">iPhone detected. This demo does not work on iPhone and iPad devices.</div>
-<div class="error hidden" id="notChromeError">Chrome not detected. Please open this page in Google Chrome.</div>
-<div class="error hidden" id="offlineError">Seems you are offline. Please go online and <a href="" style="color: red;">refresh</a> the page.</div>
-
-<ol id="taskList">
-  <li class="task hidden" id="step1">Close all incognito windows, if any. If your current window is in incognito mode, reopen the page in normal mode. <div class="buttons"><button id="step1Button">Done</button></div></li>
-  <li class="task hidden" id="step2">Keep this window open during the demonstration. <div class="buttons"><button id="step2Button">Fine</button></div></li>
-  <li class="task hidden" id="step3">
-    Open an incognito window and search Google (do not use Bing, DuckDuckGo, etc.) by pasting the phrase copied here. <strong>Do not visit the found page</strong>!<br>
-    <div class="buttons" style="display: inline-block"><button id="step3Button">Copy the search phrase</button></div>
-    <span id="step3Message" style="font-style: italic"></span>
-    <div id="googlePhrase" class="hidden">
-      <div id="googlePhraseInfo">You can also copy it from here:</div>
-      <div id="googlePhraseContent"></div>
-    </div>
-  </li>
-  <li class="task hidden" id="step4">
-    Do you see a similar result? The CODE will be different.
-    <img src="snippet.png" alt="Screenshot of Google search snippet">
-    <div class="buttons">
-      <button id="step4YesButton">Yes, I do</button>
-      <button id="step4NoButton" style="background-color: red">No, I don't</button>
-    </div>
-  </li>
-  <li class="task hidden" id="step4a">
-    <strong>Still, do not visit the page</strong>. Type the 4-digit CODE you see there into the input field below.
-    <div style="display: flex; align-items: center; gap: 5px; margin-top: 5px;">
-      <input id="secretCode" type="password" placeholder="0000" pattern="[0-9]{4}" maxlength="4" inputmode="numeric" autocomplete="off" required
-             style="border: 1px solid #007bff; padding: 5px; border-radius: 3px; font-size: 14px;">
-      <button id="step4aButton">OK</button>
-    </div>
-  </li>
-  <li class="task hidden" id="step5">
-    Please wait...
-    <div class="progress-container">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-  </li>
-  <li class="task hidden" id="step6">Enable airplane mode or disconnect this device from the internet.<br><br><span style="font-style: italic" id="waitingForOffline">Waiting...</span></li>
-  <li class="task hidden" id="step7">
-    Click the link you found in Google in the incognito window. <strong>Did you notice anything unusual?</strong> Tip: Pay attention to the small details.<br><br>If things look normal, close the incognito window and start again.
-    <div class="buttons"><a class="button-link" href="">Restart the demo</a></div>
-    <p>
-      If you are still having trouble making the demo work, please go online and refer to the explanation <a href="https://www.pawelpokrywka.com/p/stretching-google-prefetching" target="_blank">here</a>.
-    </p>
-  </li>
-</ol>
+  <h2>Instructions</h2>
+  <p>The demo consists of <strong>8 steps</strong>.<br>For the best experience, please follow them carefully and don't
+    rush.</p>
+  <ol id="taskList">
+    <li class="task hidden" id="step1">
+      <p><strong>Close all incognito windows, if any.</strong></p>
+      <p>If you are already in an incognito window, reopen this page in normal browsing mode.</p>
+      <div class="buttons"><button id="step1Button">Done</button></div>
+    </li>
+    <li class="task hidden" id="step2">
+      <p><strong>Keep this normal window open.</strong></p>
+      <p>You will need it for instructions while performing actions in a different window.</p>
+      <div class="buttons"><button id="step2Button">Fine</button></div>
+    </li>
+    <li class="task hidden" id="step3">
+      <p>
+        Press the button below to copy the search phrase. Then, <strong>open a new incognito window</strong> and paste
+        the copied phrase into Google. Do not use Bing, DuckDuckGo, or any other search engine.
+      </p>
+      <p><strong>Important: Do not click any search results yet</strong>!</p>
+      <div class="buttons" style="display: inline-block"><button id="step3Button">Copy the search phrase</button></div>
+      <span id="step3Message" style="font-style: italic"></span>
+      <div id="googlePhrase" class="hidden">
+        <div id="googlePhraseInfo">You can also copy it from here:</div>
+        <div id="googlePhraseContent"></div>
+      </div>
+    </li>
+    <li class="task hidden" id="step4">
+      <p><strong>Look for a matching search result</strong>.</p>
+      <p>It should look like this (the CODE will be different):</p>
+      <img src="snippet.png" alt="Screenshot of Google search snippet">
+      <div class="buttons">
+        <button id="step4YesButton">Yes, I see it</button>
+        <button id="step4NoButton" style="background-color: red">No, I don't</button>
+      </div>
+    </li>
+    <li class="task hidden" id="step4a">
+      <p>
+        <strong>Without clicking the search result</strong>, type the 4-digit CODE you see into the input below:
+      </p>
+      <div style="display: flex; align-items: center; gap: 5px; margin-top: 5px;">
+        <input id="secretCode" type="password" placeholder="0000" pattern="[0-9]{4}" maxlength="4" inputmode="numeric"
+          autocomplete="off" required
+          style="border: 1px solid #007bff; padding: 5px; border-radius: 3px; font-size: 14px;">
+        <button id="step4aButton">OK</button>
+      </div>
+    </li>
+    <li class="task hidden" id="step5">
+      <p><strong>Please wait...</strong></p>
+      <p>
+        This part prepares the experience. Keep the Google search results page open in your incognito window,
+        but don't perform any actions there yet.
+      </p>
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </li>
+    <li class="task hidden" id="step6">
+      <p>
+        <strong>Now disconnect from the internet.</strong>
+      </p>
+      <p>
+        You can enable airplane mode, disable Wi-Fi, or unplug the cable.
+      </p>
+      <span style="font-style: italic" id="waitingForOffline">Waiting...</span>
+    </li>
+    <li class="task hidden" id="step7">
+      <p>
+        <strong>Now click the search result you found.</strong>
+      </p>
+      <p>Pay attention — small details may surprise you.</p>
+      <p>If things look normal, close the incognito window and start again.</p>
+      <div class="buttons"><a class="button-link" href="">Restart the demo</a></div>
+      <p style="margin-top: 21px;">
+        If you're still having trouble making the demo work, please go online and refer to the
+        <a href="https://www.pawelpokrywka.com/p/stretching-google-prefetching" target="_blank">explanation</a>.
+        You will find a video recording of the demo there.
+      </p>
+    </li>
+  </ol>
 
 <script>
   // Browser detection library adjusted to not require ES modules.
@@ -296,6 +349,8 @@
       });
     }
 
+    el('googlePhraseContent').innerText = searchPhrase;
+
     const parsedUa = new BrowserDetector(window.navigator.userAgent).parseUserAgent();
 
     if (parsedUa.platform === 'IPad') return show('iPadError');
@@ -336,7 +391,6 @@
         .then(() => {
           msg.style.display = 'none';
           button.setAttribute('disabled', '');
-          el('googlePhraseContent').innerText = searchPhrase;
           show('googlePhrase');
           show('step4');
         })
