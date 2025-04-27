@@ -1,4 +1,4 @@
-# Stretching Google Prefetching Demo
+# Stretching Google's Prefetching Demo
 
 This is a demonstration of how large the prefetched data can be when using Signed Exchanges (SXG).
 
