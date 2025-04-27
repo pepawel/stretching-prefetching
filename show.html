@@ -999,6 +999,29 @@
         .dino-speech-bubble:after {
             transition: background-color 0.3s ease !important;
         }
+
+        .share-button {
+            display: inline-block;
+            margin: 0.5em;
+            padding: 0.6em 1.2em;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .share-x {
+            background-color: #1da1f2;
+            margin-left: 0;
+        }
+
+        .share-linkedin {
+            background-color: #0077b5;
+        }
+
+        .share-reddit {
+            background-color: #ff4500;
+        }
     </style>
     <template data-sxg-only>
         <link rel="preload" href="part00.gif" as="fetch" crossorigin="anonymous">
@@ -1073,22 +1096,41 @@
         </div>
 
         <div class="content-container" id="rickroll-text">
-            <h1>Rick Astley - Never Gonna Give You Up (Even When You're Offline)</h1>
+            <h1>Rick Astley - Never Gonna Give You Up (Even When You're "Offline")</h1>
 
             <h2>What just happened?</h2>
-            <p>You've been Rick Rolled! This classic internet prank has been around since 2007, and you're now part of
-                internet history. Congratulations!</p>
+            <p>
+                You've been Rick Rolled! This classic internet prank has been around since 2007.
+                Now you've experienced a modern twist — using browser prefetching.</p>
 
             <h2>I'm offline and this video is 19 MB. How?</h2>
             <p>
-                To understand, go back online and <a
-                    href="https://www.pawelpokrywka.com/p/stretching-google-prefetching" class="fake-link"
-                    target="_blank">read my post about it</a>. No pranks this time, I promise.
+                This worked because Chrome prepared resources in advance — without you realizing it.
+                To understand the full trick, go back online and read
+                <a href="https://www.pawelpokrywka.com/p/stretching-google-prefetching" class="fake-link"
+                    target="_blank">
+                    the full explanation
+                </a>. No more pranks, just technical details.
             </p>
 
-            <div class="footer">
-                <p>Made with ❤️ for demonstration purposes</p>
-            </div>
+            <h2>Enjoyed the trick?</h2>
+            <p>
+                Share this experience with a friend who loves web magic and browser quirks.
+                You'll need to go back online for the share buttons to work.
+            </p>
+
+            <a href="https://twitter.com/intent/tweet?text=Think%20you%27re%20offline%3F%20Your%20browser%20might%20surprise%20you.%20Try%20this%20short%20demo%3A%20https%3A%2F%2Fwww.planujemywesele.pl%2Fsxg-tests%2Foffline-abuse"
+                target="_blank" rel="noopener noreferrer" class="share-button share-x">
+                Share on X
+            </a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.planujemywesele.pl%2Fsxg-tests%2Foffline-abuse"
+                target="_blank" rel="noopener noreferrer" class="share-button share-linkedin">
+                Share on LinkedIn
+            </a>
+            <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.planujemywesele.pl%2Fsxg-tests%2Foffline-abuse&title=Think%20you%27re%20offline%3F%20Your%20browser%20might%20surprise%20you."
+                target="_blank" rel="noopener noreferrer" class="share-button share-reddit">
+                Share on Reddit
+            </a>
         </div>
     </div>
     <div style="display: none;" id="online-content" class="airplane-mode-container">
