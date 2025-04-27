@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en" class="offline">
+
 <head>
-  <!-- Warning: PoC code quality -->
-  <meta charset="utf-8">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#fff">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABRklEQVR42mKgOqjq75ds7510YNL0uV9nAGqniqwKYiCIHIIjcAK22BGQLRdgBWvc3fnWk/FJhrkPO1xPgGvqPfLfJMHhT1yqurvS48bPaJhjD2efgidnVwa2yv59xecvEvi0UWCXq9t0ItfP2MMZ7nwIpkA8F1n8uLxZHM6yrBH7FIl2gFXDHYsErkn2hyKLHtcKrFntk58uVQJ+kSdQnmjhID4cwLLa8+K0BXsfNWCqBOsFdo2Yldv43DBrkxd30cjnNyYBhK0SQGkI9pG4Mu40D5b374DRCAyhHqXVfTmOwivivMkJxBz5wnHCtBfGgNFC+ChWKWRf3hsQIlyEoIv4IYEo5wkgtBLRekY9DE4Uin4Keae6hydGnljPmE8kRcCine6827AMsJ1IuW9ibnlQpXLBCR/WC875m2BP+VSu3c/0m+8V08OBngc0pxcAAAAASUVORK5CYII=" type="image/png">
-  <title>Go offline — you don't need internet anymore! CODE: 0925</title>
-  <meta name="description" content="IMPORTANT: Do not click yet! Follow all setup instructions first or the demo will not function properly.">
-  <meta name="robots" content="index, follow">
-  <script type="application/ld+json">
+    <!-- Warning: PoC code quality -->
+    <meta charset="utf-8">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="icon"
+        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABRklEQVR42mKgOqjq75ds7510YNL0uV9nAGqniqwKYiCIHIIjcAK22BGQLRdgBWvc3fnWk/FJhrkPO1xPgGvqPfLfJMHhT1yqurvS48bPaJhjD2efgidnVwa2yv59xecvEvi0UWCXq9t0ItfP2MMZ7nwIpkA8F1n8uLxZHM6yrBH7FIl2gFXDHYsErkn2hyKLHtcKrFntk58uVQJ+kSdQnmjhID4cwLLa8+K0BXsfNWCqBOsFdo2Yldv43DBrkxd30cjnNyYBhK0SQGkI9pG4Mu40D5b374DRCAyhHqXVfTmOwivivMkJxBz5wnHCtBfGgNFC+ChWKWRf3hsQIlyEoIv4IYEo5wkgtBLRekY9DE4Uin4Keae6hydGnljPmE8kRcCine6827AMsJ1IuW9ibnlQpXLBCR/WC875m2BP+VSu3c/0m+8V08OBngc0pxcAAAAASUVORK5CYII="
+        type="image/png">
+    <title>Go offline — you don't need internet anymore! CODE: 0925</title>
+    <meta name="description"
+        content="IMPORTANT: Do not click yet! Follow all setup instructions first or the demo will not function properly.">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
@@ -29,1273 +33,1292 @@
     }
   }
   </script>
-  <style>
-      /* Copyright 2017 The Chromium Authors
+    <style>
+        /* Copyright 2017 The Chromium Authors
        * Use of this source code is governed by a BSD-style license that can be
        * found in the LICENSE file. */
 
-      a {
-          color: var(--link-color);
-      }
+        a {
+            color: var(--link-color);
+        }
 
-      body {
-          --background-color: #fff;
-          --speech-bubble-background-color: rgb(140, 255, 140);
-          --speech-bubble-text-color: rgb(0, 100, 0);
-          --error-code-color: var(--google-gray-700);
-          --google-blue-50: rgb(232, 240, 254);
-          --google-blue-100: rgb(210, 227, 252);
-          --google-blue-300: rgb(138, 180, 248);
-          --google-blue-600: rgb(26, 115, 232);
-          --google-blue-700: rgb(25, 103, 210);
-          --google-gray-100: rgb(241, 243, 244);
-          --google-gray-300: rgb(218, 220, 224);
-          --google-gray-500: rgb(154, 160, 166);
-          --google-gray-50: rgb(248, 249, 250);
-          --google-gray-600: rgb(128, 134, 139);
-          --google-gray-700: rgb(95, 99, 104);
-          --google-gray-800: rgb(60, 64, 67);
-          --google-gray-900: rgb(32, 33, 36);
-          --heading-color: var(--google-gray-900);
-          --link-color: rgb(88, 88, 88);
-          --primary-button-fill-color-active: var(--google-blue-700);
-          --primary-button-fill-color: var(--google-blue-600);
-          --primary-button-text-color: #fff;
-          --quiet-background-color: rgb(247, 247, 247);
-          --secondary-button-border-color: var(--google-gray-500);
-          --secondary-button-fill-color: #fff;
-          --secondary-button-hover-border-color: var(--google-gray-600);
-          --secondary-button-hover-fill-color: var(--google-gray-50);
-          --secondary-button-text-color: var(--google-gray-700);
-          --small-link-color: var(--google-gray-700);
-          --text-color: var(--google-gray-700);
-          background: var(--background-color);
-          color: var(--text-color);
-          word-wrap: break-word;
-      }
+        body {
+            --background-color: #fff;
+            --speech-bubble-background-color: rgb(140, 255, 140);
+            --speech-bubble-text-color: rgb(0, 100, 0);
+            --error-code-color: var(--google-gray-700);
+            --google-blue-50: rgb(232, 240, 254);
+            --google-blue-100: rgb(210, 227, 252);
+            --google-blue-300: rgb(138, 180, 248);
+            --google-blue-600: rgb(26, 115, 232);
+            --google-blue-700: rgb(25, 103, 210);
+            --google-gray-100: rgb(241, 243, 244);
+            --google-gray-300: rgb(218, 220, 224);
+            --google-gray-500: rgb(154, 160, 166);
+            --google-gray-50: rgb(248, 249, 250);
+            --google-gray-600: rgb(128, 134, 139);
+            --google-gray-700: rgb(95, 99, 104);
+            --google-gray-800: rgb(60, 64, 67);
+            --google-gray-900: rgb(32, 33, 36);
+            --heading-color: var(--google-gray-900);
+            --link-color: rgb(88, 88, 88);
+            --primary-button-fill-color-active: var(--google-blue-700);
+            --primary-button-fill-color: var(--google-blue-600);
+            --primary-button-text-color: #fff;
+            --quiet-background-color: rgb(247, 247, 247);
+            --secondary-button-border-color: var(--google-gray-500);
+            --secondary-button-fill-color: #fff;
+            --secondary-button-hover-border-color: var(--google-gray-600);
+            --secondary-button-hover-fill-color: var(--google-gray-50);
+            --secondary-button-text-color: var(--google-gray-700);
+            --small-link-color: var(--google-gray-700);
+            --text-color: var(--google-gray-700);
+            background: var(--background-color);
+            color: var(--text-color);
+            word-wrap: break-word;
+        }
 
-      .hidden {
-          display: none;
-      }
+        .hidden {
+            display: none;
+        }
 
-      html {
-          -webkit-text-size-adjust: 100%;
-          font-size: 125%;
-      }
+        html {
+            -webkit-text-size-adjust: 100%;
+            font-size: 125%;
+        }
 
-      .icon {
-          background-repeat: no-repeat;
-          background-size: 100%;
-      }
+        .icon {
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
 
-      @media (prefers-color-scheme: dark) {
-          body {
-              --background-color: var(--google-gray-900);
-              --speech-bubble-background-color: rgb(0, 100, 0);
-              --speech-bubble-text-color: rgb(140, 255, 140);
-              --error-code-color: var(--google-gray-500);
-              --heading-color: var(--google-gray-500);
-              --link-color: var(--google-blue-300);
-              --primary-button-fill-color-active: rgb(129, 162, 208);
-              --primary-button-fill-color: var(--google-blue-300);
-              --primary-button-text-color: var(--google-gray-900);
-              --quiet-background-color: var(--background-color);
-              --secondary-button-border-color: var(--google-gray-700);
-              --secondary-button-fill-color: var(--google-gray-900);
-              --secondary-button-hover-fill-color: rgb(48, 51, 57);
-              --secondary-button-text-color: var(--google-blue-300);
-              --small-link-color: var(--google-blue-300);
-              --text-color: var(--google-gray-500);
-          }
-      }
+        @media (prefers-color-scheme: dark) {
+            body {
+                --background-color: var(--google-gray-900);
+                --speech-bubble-background-color: rgb(0, 100, 0);
+                --speech-bubble-text-color: rgb(140, 255, 140);
+                --error-code-color: var(--google-gray-500);
+                --heading-color: var(--google-gray-500);
+                --link-color: var(--google-blue-300);
+                --primary-button-fill-color-active: rgb(129, 162, 208);
+                --primary-button-fill-color: var(--google-blue-300);
+                --primary-button-text-color: var(--google-gray-900);
+                --quiet-background-color: var(--background-color);
+                --secondary-button-border-color: var(--google-gray-700);
+                --secondary-button-fill-color: var(--google-gray-900);
+                --secondary-button-hover-fill-color: rgb(48, 51, 57);
+                --secondary-button-text-color: var(--google-blue-300);
+                --small-link-color: var(--google-blue-300);
+                --text-color: var(--google-gray-500);
+            }
+        }
 
-      /* Copyright 2014 The Chromium Authors
+        /* Copyright 2014 The Chromium Authors
          Use of this source code is governed by a BSD-style license that can be
          found in the LICENSE file. */
 
-      #details {
-          margin: 0 0 50px;
-      }
+        #details {
+            margin: 0 0 50px;
+        }
 
-      #details p:not(:first-of-type) {
-          margin-top: 20px;
-      }
+        #details p:not(:first-of-type) {
+            margin-top: 20px;
+        }
 
-      .error-code {
-          color: var(--error-code-color);
-          font-size: .8em;
-          margin-top: 12px;
-          text-transform: uppercase;
-      }
+        .error-code {
+            color: var(--error-code-color);
+            font-size: .8em;
+            margin-top: 12px;
+            text-transform: uppercase;
+        }
 
-      h1 {
-          color: var(--heading-color);
-          font-size: 1.6em;
-          font-weight: normal;
-          line-height: 1.25em;
-          margin-bottom: 16px;
-      }
+        h1 {
+            color: var(--heading-color);
+            font-size: 1.6em;
+            font-weight: normal;
+            line-height: 1.25em;
+            margin-bottom: 16px;
+        }
 
-      .icon {
-          height: 72px;
-          margin: 0 0 40px;
-          width: 72px;
-      }
+        .icon {
+            height: 72px;
+            margin: 0 0 40px;
+            width: 72px;
+        }
 
-      input[type=checkbox] {
-          opacity: 0;
-      }
+        input[type=checkbox] {
+            opacity: 0;
+        }
 
-      input[type=checkbox]:focus~.checkbox::after {
-          outline: -webkit-focus-ring-color auto 5px;
-      }
+        input[type=checkbox]:focus~.checkbox::after {
+            outline: -webkit-focus-ring-color auto 5px;
+        }
 
-      .interstitial-wrapper {
-          box-sizing: border-box;
-          font-size: 1em;
-          line-height: 1.6em;
-          margin: 14vh auto 0;
-          max-width: 600px;
-          width: 100%;
-      }
+        .interstitial-wrapper {
+            box-sizing: border-box;
+            font-size: 1em;
+            line-height: 1.6em;
+            margin: 14vh auto 0;
+            max-width: 600px;
+            width: 100%;
+        }
 
-      #main-message>p {
-          display: inline;
-      }
+        #main-message>p {
+            display: inline;
+        }
 
-      .nav-wrapper {
-          margin-top: 51px;
-      }
+        .nav-wrapper {
+            margin-top: 51px;
+        }
 
-      .nav-wrapper::after {
-          clear: both;
-          content: '';
-          display: table;
-          width: 100%;
-      }
+        .nav-wrapper::after {
+            clear: both;
+            content: '';
+            display: table;
+            width: 100%;
+        }
 
-      .checkbox {
-          --padding: .9em;
-          background: transparent;
-          display: block;
-          height: 1em;
-          left: -1em;
-          padding-inline-start: var(--padding);
-          position: absolute;
-          right: 0;
-          top: -.5em;
-          width: 1em;
-      }
+        .checkbox {
+            --padding: .9em;
+            background: transparent;
+            display: block;
+            height: 1em;
+            left: -1em;
+            padding-inline-start: var(--padding);
+            position: absolute;
+            right: 0;
+            top: -.5em;
+            width: 1em;
+        }
 
-      .checkbox::after {
-          border: 1px solid white;
-          border-radius: 2px;
-          content: '';
-          height: 1em;
-          left: var(--padding);
-          position: absolute;
-          top: var(--padding);
-          width: 1em;
-      }
+        .checkbox::after {
+            border: 1px solid white;
+            border-radius: 2px;
+            content: '';
+            height: 1em;
+            left: var(--padding);
+            position: absolute;
+            top: var(--padding);
+            width: 1em;
+        }
 
-      .checkbox::before {
-          background: transparent;
-          border: 2px solid white;
-          border-inline-end-width: 0;
-          border-top-width: 0;
-          content: '';
-          height: .2em;
-          left: calc(.3em + var(--padding));
-          opacity: 0;
-          position: absolute;
-          top: calc(.3em + var(--padding));
-          transform: rotate(-45deg);
-          width: .5em;
-      }
+        .checkbox::before {
+            background: transparent;
+            border: 2px solid white;
+            border-inline-end-width: 0;
+            border-top-width: 0;
+            content: '';
+            height: .2em;
+            left: calc(.3em + var(--padding));
+            opacity: 0;
+            position: absolute;
+            top: calc(.3em + var(--padding));
+            transform: rotate(-45deg);
+            width: .5em;
+        }
 
-      input[type=checkbox]:checked~.checkbox::before {
-          opacity: 1;
-      }
+        input[type=checkbox]:checked~.checkbox::before {
+            opacity: 1;
+        }
 
-      @media (max-width: 700px) {
-          .interstitial-wrapper {
-              padding: 0 10%;
-          }
-      }
+        @media (max-width: 700px) {
+            .interstitial-wrapper {
+                padding: 0 10%;
+            }
+        }
 
-      @media (max-width: 420px) {
+        @media (max-width: 420px) {
 
-          #details {
-              margin: 20px 0 20px 0;
-          }
+            #details {
+                margin: 20px 0 20px 0;
+            }
 
-          #details p:not(:first-of-type) {
-              margin-top: 10px;
-          }
+            #details p:not(:first-of-type) {
+                margin-top: 10px;
+            }
 
-          .interstitial-wrapper {
-              padding: 0 5%;
-          }
+            .interstitial-wrapper {
+                padding: 0 5%;
+            }
 
-          .nav-wrapper {
-              margin-top: 30px;
-          }
-      }
+            .nav-wrapper {
+                margin-top: 30px;
+            }
+        }
 
-      /* Mobile specific styling.
+        /* Mobile specific styling.
        * Navigation buttons are anchored to the bottom of the screen.
        * Details message replaces the top content in its own scrollable area.
        */
 
-      /* Fixed nav. */
-      @media (min-width: 240px) and (max-width: 420px) and (min-height: 401px),
-      (min-width: 421px) and (min-height: 240px) and (max-height: 560px) {
-          body .nav-wrapper {
-              background: var(--background-color);
-              bottom: 0;
-              box-shadow: 0 -12px 24px var(--background-color);
-              left: 0;
-              margin: 0 auto;
-              max-width: 736px;
-              padding-inline-end: 24px;
-              padding-inline-start: 24px;
-              position: fixed;
-              right: 0;
-              width: 100%;
-              z-index: 2;
-          }
+        /* Fixed nav. */
+        @media (min-width: 240px) and (max-width: 420px) and (min-height: 401px),
+        (min-width: 421px) and (min-height: 240px) and (max-height: 560px) {
+            body .nav-wrapper {
+                background: var(--background-color);
+                bottom: 0;
+                box-shadow: 0 -12px 24px var(--background-color);
+                left: 0;
+                margin: 0 auto;
+                max-width: 736px;
+                padding-inline-end: 24px;
+                padding-inline-start: 24px;
+                position: fixed;
+                right: 0;
+                width: 100%;
+                z-index: 2;
+            }
 
-          .interstitial-wrapper {
-              max-width: 736px;
-          }
+            .interstitial-wrapper {
+                max-width: 736px;
+            }
 
-          #details,
-          #main-content {
-              padding-bottom: 40px;
-          }
+            #details,
+            #main-content {
+                padding-bottom: 40px;
+            }
 
-          #details {
-              padding-top: 5.5vh;
-          }
-      }
+            #details {
+                padding-top: 5.5vh;
+            }
+        }
 
-      @media (max-width: 420px) and (orientation: portrait),
-      (max-height: 560px) {
-          body {
-              margin: 0 auto;
-          }
+        @media (max-width: 420px) and (orientation: portrait),
+        (max-height: 560px) {
+            body {
+                margin: 0 auto;
+            }
 
-          .nav-wrapper {
-              box-sizing: border-box;
-              padding-bottom: 8px;
-              width: 100%;
-          }
+            .nav-wrapper {
+                box-sizing: border-box;
+                padding-bottom: 8px;
+                width: 100%;
+            }
 
-          #details {
-              box-sizing: border-box;
-              height: auto;
-              margin: 0;
-              opacity: 1;
-              transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-          }
+            #details {
+                box-sizing: border-box;
+                height: auto;
+                margin: 0;
+                opacity: 1;
+                transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            }
 
-          #details.hidden,
-          #main-content.hidden {
-              height: 0;
-              opacity: 0;
-              overflow: hidden;
-              padding-bottom: 0;
-              transition: none;
-          }
+            #details.hidden,
+            #main-content.hidden {
+                height: 0;
+                opacity: 0;
+                overflow: hidden;
+                padding-bottom: 0;
+                transition: none;
+            }
 
-          h1 {
-              font-size: 1.5em;
-              margin-bottom: 8px;
-          }
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 8px;
+            }
 
-          .icon {
-              margin-bottom: 5.69vh;
-          }
+            .icon {
+                margin-bottom: 5.69vh;
+            }
 
-          .interstitial-wrapper {
-              box-sizing: border-box;
-              margin: 7vh auto 12px;
-              padding: 0 24px;
-              position: relative;
-          }
+            .interstitial-wrapper {
+                box-sizing: border-box;
+                margin: 7vh auto 12px;
+                padding: 0 24px;
+                position: relative;
+            }
 
-          .interstitial-wrapper p {
-              font-size: .95em;
-              line-height: 1.61em;
-              margin-top: 8px;
-          }
+            .interstitial-wrapper p {
+                font-size: .95em;
+                line-height: 1.61em;
+                margin-top: 8px;
+            }
 
-          #main-content {
-              margin: 0;
-              transition: opacity 100ms cubic-bezier(0.4, 0, 0.2, 1);
-          }
+            #main-content {
+                margin: 0;
+                transition: opacity 100ms cubic-bezier(0.4, 0, 0.2, 1);
+            }
 
 
-          .suggested-right>#control-buttons {
-              float: none;
-              margin: 0;
-          }
-      }
+            .suggested-right>#control-buttons {
+                float: none;
+                margin: 0;
+            }
+        }
 
-      @media (min-width: 421px) and (min-height: 500px) and (max-height: 560px) {
-          .interstitial-wrapper {
-              margin-top: 10vh;
-          }
-      }
+        @media (min-width: 421px) and (min-height: 500px) and (max-height: 560px) {
+            .interstitial-wrapper {
+                margin-top: 10vh;
+            }
+        }
 
-      @media (min-height: 400px) and (orientation:portrait) {
-          .interstitial-wrapper {
-              margin-bottom: 145px;
-          }
-      }
+        @media (min-height: 400px) and (orientation:portrait) {
+            .interstitial-wrapper {
+                margin-bottom: 145px;
+            }
+        }
 
-      @media (min-height: 299px) {
-          .nav-wrapper {
-              padding-bottom: 16px;
-          }
-      }
+        @media (min-height: 299px) {
+            .nav-wrapper {
+                padding-bottom: 16px;
+            }
+        }
 
-      @media (min-height: 500px) and (max-height: 650px) and (max-width: 414px) and (orientation: portrait) {
-          .interstitial-wrapper {
-              margin-top: 7vh;
-          }
-      }
+        @media (min-height: 500px) and (max-height: 650px) and (max-width: 414px) and (orientation: portrait) {
+            .interstitial-wrapper {
+                margin-top: 7vh;
+            }
+        }
 
-      @media (min-height: 650px) and (max-width: 414px) and (orientation: portrait) {
-          .interstitial-wrapper {
-              margin-top: 10vh;
-          }
-      }
+        @media (min-height: 650px) and (max-width: 414px) and (orientation: portrait) {
+            .interstitial-wrapper {
+                margin-top: 10vh;
+            }
+        }
 
-      /* Small mobile screens. No fixed nav. */
-      @media (max-height: 400px) and (orientation: portrait),
-      (max-height: 239px) and (orientation: landscape),
-      (max-width: 419px) and (max-height: 399px) {
-          .interstitial-wrapper {
-              display: flex;
-              flex-direction: column;
-              margin-bottom: 0;
-          }
+        /* Small mobile screens. No fixed nav. */
+        @media (max-height: 400px) and (orientation: portrait),
+        (max-height: 239px) and (orientation: landscape),
+        (max-width: 419px) and (max-height: 399px) {
+            .interstitial-wrapper {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 0;
+            }
 
-          #details {
-              flex: 1 1 auto;
-              order: 0;
-          }
+            #details {
+                flex: 1 1 auto;
+                order: 0;
+            }
 
-          #main-content {
-              flex: 1 1 auto;
-              order: 0;
-          }
+            #main-content {
+                flex: 1 1 auto;
+                order: 0;
+            }
 
-          .nav-wrapper {
-              flex: 0 1 auto;
-              margin-top: 8px;
-              order: 1;
-              padding-inline-end: 0;
-              padding-inline-start: 0;
-              position: relative;
-              width: 100%;
-          }
-      }
+            .nav-wrapper {
+                flex: 0 1 auto;
+                margin-top: 8px;
+                order: 1;
+                padding-inline-end: 0;
+                padding-inline-start: 0;
+                position: relative;
+                width: 100%;
+            }
+        }
 
-      @media (max-width: 239px) and (orientation: portrait) {
-          .nav-wrapper {
-              padding-inline-end: 0;
-              padding-inline-start: 0;
-          }
-      }
+        @media (max-width: 239px) and (orientation: portrait) {
+            .nav-wrapper {
+                padding-inline-end: 0;
+                padding-inline-start: 0;
+            }
+        }
 
-      /* Copyright 2013 The Chromium Authors
+        /* Copyright 2013 The Chromium Authors
        * Use of this source code is governed by a BSD-style license that can be
        * found in the LICENSE file. */
 
-      .dino-speech-bubble {
-          position: absolute;
-          background-color: var(--speech-bubble-background-color);
-          border-radius: 18px;
-          padding: 12px 15px;
-          color: var(--speech-bubble-text-color);
-          font-family: inherit;
-          font-size: 0.9em;
-          line-height: 1.4;
-          max-width: 230px;
-          height: auto;
-          z-index: 20;
-          left: 110px;
-          top: 90px;
-          opacity: 0;
-          transform: translateY(10px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
-          pointer-events: none;
-      }
-
-      .dino-speech-bubble.show {
-          opacity: 1;
-          transform: translateY(0);
-          pointer-events: auto;
-      }
-
-      .dino-speech-bubble:before,
-      .dino-speech-bubble:after {
-          content: "";
-          position: absolute;
-          bottom: -0.1rem;
-          height: 1rem;
-      }
-
-      .dino-speech-bubble:before {
-          border-bottom-right-radius: 0.8rem 0.7rem;
-          border-left: 1rem solid var(--speech-bubble-background-color);
-          left: -0.35rem;
-          transform: translate(0, -0.05rem);
-      }
-
-      .dino-speech-bubble:after {
-          background-color: var(--background-color);
-          border-bottom-right-radius: 0.5rem;
-          left: 20px;
-          transform: translate(-30px, -2px);
-          width: 10px;
-      }
-
-      .dino-speech-bubble a {
-          color: var(--background-color);
-          font-weight: bold;
-          text-decoration: underline;
-      }
-
-      html:not([subframe]) #sub-frame-error {
-          display: none;
-      }
-
-      h1 {
-          margin-top: 0;
-          word-wrap: break-word;
-      }
-
-      h1 span {
-          font-weight: 500;
-      }
-
-      a {
-          text-decoration: none;
-      }
-
-      .icon {
-          -webkit-user-select: none;
-          display: inline-block;
-      }
-
-      .icon-offline {
-          content: image-set(url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABIAQMAAABvIyEEAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAGxJREFUeF7tyMEJwkAQRuFf5ipMKxYQiJ3Z2nSwrWwBA0+DQZcdxEOueaePp9+dQZFB7GpUcURSVU66yVNFj6LFICatThZB6r/ko/pbRpUgilY0Cbw5sNmb9txGXUKyuH7eV25x39DtJXUNPQGJtWFV+BT/QAAAAABJRU5ErkJggg==) 1x,
-          url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAACQBAMAAAAVaP+LAAAAGFBMVEUAAABTU1NNTU1TU1NPT09SUlJSUlJTU1O8B7DEAAAAB3RSTlMAoArVKvVgBuEdKgAAAJ1JREFUeF7t1TEOwyAMQNG0Q6/UE+RMXD9d/tC6womIFSL9P+MnAYOXeTIzMzMzMzMzaz8J9Ri6HoITmuHXhISE8nEh9yxDh55aCEUoTGbbQwjqHwIkRAEiIaG0+0AA9VBMaE89Rogeoww936MQrWdBr4GN/z0IAdQ6nQ/FIpRXDwHcA+JIJcQowQAlFUA0MfQpXLlVQfkzR4igS6ENjknm/wiaGhsAAAAASUVORK5CYII=) 2x);
-          position: relative;
-      }
-
-      .hidden {
-          display: none;
-      }
-
-      #suggestions-list a {
-          color: var(--google-blue-600);
-      }
-
-      #suggestions-list p {
-          margin-block-end: 0;
-      }
-
-      #suggestions-list ul {
-          margin-top: 0;
-      }
-
-      #sub-frame-error-details {
-
-          color: #8F8F8F;
-
-          /* Not done on mobile for performance reasons. */
-          text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
-
-      }
-
-      @-webkit-keyframes show-snackbar {
-          100% {
-              opacity: 1;
-              transform: translateY(0);
-          }
-      }
-
-      @-webkit-keyframes hide-snackbar {
-          0% {
-              opacity: 1;
-              transform: translateY(0);
-          }
-
-          100% {
-              opacity: 0;
-              transform: translateY(90px);
-          }
-      }
-
-      /* Decrease padding at low sizes. */
-      @media (max-width: 640px),
-      (max-height: 640px) {
-          h1 {
-              margin: 0 0 15px;
-          }
-      }
-
-      /* Don't allow overflow when in a subframe. */
-
-      #sub-frame-error {
-          -webkit-align-items: center;
-          -webkit-flex-flow: column;
-          -webkit-justify-content: center;
-          background-color: #DDD;
-          display: -webkit-flex;
-          height: 100%;
-          left: 0;
-          position: absolute;
-          text-align: center;
-          top: 0;
-          transition: background-color 200ms ease-in-out;
-          width: 100%;
-      }
-
-      #sub-frame-error:hover {
-          background-color: #EEE;
-      }
-
-      #sub-frame-error-details {
-          margin: 0 10px;
-          text-align: center;
-          opacity: 0;
-      }
-
-      /* Show details only when hovering. */
-      #sub-frame-error:hover #sub-frame-error-details {
-          opacity: 1;
-      }
-
-      /* If the iframe is too small, always hide the error code. */
-      /* TODO(mmenke): See if overflow: no-display works better, once supported. */
-      @media (max-width: 200px),
-      (max-height: 95px) {
-          #sub-frame-error-details {
-              display: none;
-          }
-      }
-
-      .suggested-right>#control-buttons {
-          float: right;
-      }
-
-      #buttons::after {
-          clear: both;
-          content: '';
-          display: block;
-          width: 100%;
-      }
-
-      .offline {
-          transition: filter 1.5s cubic-bezier(0.65, 0.05, 0.36, 1),
-          will-change: filter, background-color;
-      }
-
-      .offline #main-message>p {
-          display: none;
-      }
-
-      .offline .interstitial-wrapper {
-          color: var(--text-color);
-          font-size: 1em;
-          line-height: 1.55;
-          margin: 0 auto;
-          max-width: 600px;
-          padding-top: 100px;
-          position: relative;
-          width: 100%;
-      }
-
-      .offline .runner-container {
-          direction: ltr;
-          height: 150px;
-          max-width: 600px;
-          overflow: hidden;
-          position: absolute;
-          top: 35px;
-          width: 44px;
-      }
-
-      .offline .runner-container:focus {
-          outline: none;
-      }
-
-      .offline .runner-container:focus-visible {
-          outline: 3px solid var(--google-blue-300);
-      }
-
-      .offline .runner-canvas {
-          height: 150px;
-          max-width: 600px;
-          opacity: 1;
-          overflow: hidden;
-          position: absolute;
-          top: 0;
-          z-index: 10;
-      }
-
-      #offline-resources {
-          display: none;
-      }
-
-      .offline-runner-live-region {
-          bottom: 0;
-          clip-path: polygon(0 0, 0 0, 0 0);
-          color: var(--background-color);
-          display: block;
-          font-size: xx-small;
-          overflow: hidden;
-          position: absolute;
-          text-align: center;
-          transition: color 1.5s cubic-bezier(0.65, 0.05, 0.36, 1);
-          user-select: none;
-      }
-
-      /* Custom toggle */
-      .slow-speed-option {
-          align-items: center;
-          background: var(--google-gray-50);
-          border-radius: 24px/50%;
-          bottom: 0;
-          color: var(--error-code-color);
-          display: inline-flex;
-          font-size: 1em;
-          left: 0;
-          line-height: 1.1em;
-          margin: 5px auto;
-          padding: 2px 12px 3px 20px;
-          position: absolute;
-          right: 0;
-          width: max-content;
-          z-index: 999;
-      }
-
-      .slow-speed-option.hidden {
-          display: none;
-      }
-
-      .slow-speed-option [type=checkbox] {
-          opacity: 0;
-          pointer-events: none;
-          position: absolute;
-      }
-
-      .slow-speed-option .slow-speed-toggle {
-          cursor: pointer;
-          margin-inline-start: 8px;
-          padding: 8px 4px;
-          position: relative;
-      }
-
-      .slow-speed-option [type=checkbox]:disabled~.slow-speed-toggle {
-          cursor: default;
-      }
-
-      .slow-speed-option .slow-speed-toggle::before,
-      .slow-speed-option .slow-speed-toggle::after {
-          content: '';
-          display: block;
-          margin: 0 3px;
-          transition: all 100ms cubic-bezier(0.4, 0, 1, 1);
-      }
-
-      .slow-speed-option .slow-speed-toggle::before {
-          background: rgb(189, 193, 198);
-          border-radius: 0.65em;
-          height: 0.9em;
-          width: 2em;
-      }
-
-      .slow-speed-option .slow-speed-toggle::after {
-          background: #fff;
-          border-radius: 50%;
-          box-shadow: 0 1px 3px 0 rgb(0 0 0 / 40%);
-          height: 1.2em;
-          position: absolute;
-          top: 51%;
-          transform: translate(-20%, -50%);
-          width: 1.1em;
-      }
-
-      .slow-speed-option [type=checkbox]:focus+.slow-speed-toggle {
-          box-shadow: 0 0 8px rgb(94, 158, 214);
-          outline: 1px solid rgb(93, 157, 213);
-      }
-
-      .slow-speed-option [type=checkbox]:checked+.slow-speed-toggle::before {
-          background: var(--google-blue-600);
-          opacity: 0.5;
-      }
-
-      .slow-speed-option [type=checkbox]:checked+.slow-speed-toggle::after {
-          background: var(--google-blue-600);
-          transform: translate(calc(2em - 90%), -50%);
-      }
-
-      .slow-speed-option [type=checkbox]:checked:disabled+.slow-speed-toggle::before {
-          background: rgb(189, 193, 198);
-      }
-
-      .slow-speed-option [type=checkbox]:checked:disabled+.slow-speed-toggle::after {
-          background: var(--google-gray-50);
-      }
-
-      @media (max-width: 420px) {
-
-
-          .suggested-right>#control-buttons {
-              float: none;
-          }
-      }
-
-      @media (max-height: 350px) {
-          h1 {
-              margin: 0 0 15px;
-          }
-
-          .icon-offline {
-              margin: 0 0 10px;
-          }
-
-          .interstitial-wrapper {
-              margin-top: 5%;
-          }
-
-          .nav-wrapper {
-              margin-top: 30px;
-          }
-      }
-
-      @media (min-width: 420px) and (max-width: 736px) and (min-height: 240px) and (max-height: 420px) and (orientation:landscape) {
-          .interstitial-wrapper {
-              margin-bottom: 100px;
-          }
-      }
-
-      @media (max-width: 360px) and (max-height: 480px) {
-          .offline .interstitial-wrapper {
-              padding-top: 60px;
-          }
-
-          .offline .runner-container {
-              top: 8px;
-          }
-      }
-
-      @media (min-height: 240px) and (orientation: landscape) {
-          .offline .interstitial-wrapper {
-              margin-bottom: 90px;
-          }
-
-          .icon-offline {
-              margin-bottom: 20px;
-          }
-      }
-
-      @media (max-height: 320px) and (orientation: landscape) {
-          .icon-offline {
-              margin-bottom: 0;
-          }
-
-          .offline .runner-container {
-              top: 10px;
-          }
-      }
-
-      @media (max-width: 240px) {
-
-          .interstitial-wrapper {
-              overflow: inherit;
-              padding: 0 8px;
-          }
-      }
-
-      @media (prefers-color-scheme: dark) {
-          .icon {
-              filter: invert(1);
-          }
-
-          .offline .runner-canvas {
-              filter: invert(1);
-          }
-
-          #suggestions-list a {
-              color: var(--link-color);
-          }
-
-          .slow-speed-option {
-              background: var(--google-gray-800);
-              color: var(--google-gray-100);
-          }
-
-          .slow-speed-option .slow-speed-toggle::before,
-          .slow-speed-option [type=checkbox]:checked:disabled+.slow-speed-toggle::before {
-              background: rgb(189, 193, 198);
-          }
-
-          .slow-speed-option [type=checkbox]:checked+.slow-speed-toggle::after,
-          .slow-speed-option [type=checkbox]:checked+.slow-speed-toggle::before {
-              background: var(--google-blue-300);
-          }
-      }
-
-      #main-frame-error:not(.showing-details) #details {
-          display: none;
-      }
-
-      .video-container {
-          max-width: 600px;
-          margin: 0 auto;
-          display: none;
-          overflow: hidden;
-          max-height: 470px;
-      }
-
-      video {
-          width: 100%;
-          border-radius: 8px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          transform: translateY(20%) scale(1.4);
-      }
-
-      .content-container {
-          max-width: 600px;
-          margin: 0 auto;
-          padding: 20px;
-          color: var(--text-color);
-          font-family: inherit;
-          display: none;
-      }
-
-      .rickroll-content h1 {
-          color: var(--heading-color);
-          font-size: 1.6em;
-          font-weight: normal;
-          margin-bottom: 16px;
-          text-align: center;
-      }
-
-      .rickroll-content h2 {
-          color: var(--heading-color);
-          font-size: 1.3em;
-          margin-top: 24px;
-          margin-bottom: 12px;
-      }
-
-      .rickroll-content p {
-          margin-bottom: 16px;
-          line-height: 1.5;
-      }
-
-      .rickroll-content ul,
-      .rickroll-content ol {
-          margin-left: 24px;
-          margin-bottom: 16px;
-      }
-
-      .rickroll-content li {
-          margin-bottom: 8px;
-          line-height: 1.4;
-      }
-
-      .footer {
-          text-align: center;
-          margin-top: 40px;
-          font-size: 0.9em;
-          color: var(--error-code-color);
-      }
-
-      .fake-link {
-          color: var(--link-color);
-          text-decoration: underline;
-          cursor: pointer;
-      }
-
-      .fake-link:hover {
-          text-decoration: none;
-      }
-
-      .dino-speech-bubble .fake-link {
-          color: inherit;
-          font-weight: bold;
-      }
-
-      .airplane-mode-container * {
-          box-sizing: border-box;
-      }
-
-      .airplane-mode-container {
-          font-family: Arial, sans-serif;
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 20px;
-          line-height: 1.6;
-          color: #333;
-      }
-
-      .airplane-mode-container h1 {
-          color: #c0392b;
-          text-align: center;
-          margin-bottom: 30px;
-          font-size: 32px;
-      }
-
-      .airplane-mode-container .message-container {
-          background-color: #f8f9fa;
-          padding: 25px;
-          border-radius: 8px;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      }
-
-      .airplane-mode-container .footer {
-          margin-top: 40px;
-          text-align: center;
-          font-size: 0.9em;
-          color: #7f8c8d;
-      }
-
-      .important-link, .unimportant-link {
-          text-decoration: underline;
-      }
-      .important-link:hover, .unimportant-link:hover {
-          text-decoration: none;
-      }
-      .unimportant-link {
-          color: #333;
-      }
-
-      .dino-speech-bubble {
-          transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease, color 0.3s ease;
-      }
-
-      .dino-speech-bubble[class]:before {
-          transition: border-color 0.3s ease !important;
-          border-left: 1rem solid var(--speech-bubble-background-color);
-      }
-
-      .dino-speech-bubble:after {
-          transition: background-color 0.3s ease !important;
-      }
-
-  </style>
-  <template data-sxg-only>
-    <link rel="preload" href="part00.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part01.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part02.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part03.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part04.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part05.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part06.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part07.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part08.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part09.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part10.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part11.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part12.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part13.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part14.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part15.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part16.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part17.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="part18.gif" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="/sxg/resolve-status.js" as="script">
-  </template>
+        .dino-speech-bubble {
+            position: absolute;
+            background-color: var(--speech-bubble-background-color);
+            border-radius: 18px;
+            padding: 12px 15px;
+            color: var(--speech-bubble-text-color);
+            font-family: inherit;
+            font-size: 0.9em;
+            line-height: 1.4;
+            max-width: 230px;
+            height: auto;
+            z-index: 20;
+            left: 110px;
+            top: 90px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+        }
+
+        .dino-speech-bubble.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .dino-speech-bubble:before,
+        .dino-speech-bubble:after {
+            content: "";
+            position: absolute;
+            bottom: -0.1rem;
+            height: 1rem;
+        }
+
+        .dino-speech-bubble:before {
+            border-bottom-right-radius: 0.8rem 0.7rem;
+            border-left: 1rem solid var(--speech-bubble-background-color);
+            left: -0.35rem;
+            transform: translate(0, -0.05rem);
+        }
+
+        .dino-speech-bubble:after {
+            background-color: var(--background-color);
+            border-bottom-right-radius: 0.5rem;
+            left: 20px;
+            transform: translate(-30px, -2px);
+            width: 10px;
+        }
+
+        .dino-speech-bubble a {
+            color: var(--background-color);
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        html:not([subframe]) #sub-frame-error {
+            display: none;
+        }
+
+        h1 {
+            margin-top: 0;
+            word-wrap: break-word;
+        }
+
+        h1 span {
+            font-weight: 500;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .icon {
+            -webkit-user-select: none;
+            display: inline-block;
+        }
+
+        .icon-offline {
+            content: image-set(url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABIAQMAAABvIyEEAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAGxJREFUeF7tyMEJwkAQRuFf5ipMKxYQiJ3Z2nSwrWwBA0+DQZcdxEOueaePp9+dQZFB7GpUcURSVU66yVNFj6LFICatThZB6r/ko/pbRpUgilY0Cbw5sNmb9txGXUKyuH7eV25x39DtJXUNPQGJtWFV+BT/QAAAAABJRU5ErkJggg==) 1x,
+                    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAACQBAMAAAAVaP+LAAAAGFBMVEUAAABTU1NNTU1TU1NPT09SUlJSUlJTU1O8B7DEAAAAB3RSTlMAoArVKvVgBuEdKgAAAJ1JREFUeF7t1TEOwyAMQNG0Q6/UE+RMXD9d/tC6womIFSL9P+MnAYOXeTIzMzMzMzMzaz8J9Ri6HoITmuHXhISE8nEh9yxDh55aCEUoTGbbQwjqHwIkRAEiIaG0+0AA9VBMaE89Rogeoww936MQrWdBr4GN/z0IAdQ6nQ/FIpRXDwHcA+JIJcQowQAlFUA0MfQpXLlVQfkzR4igS6ENjknm/wiaGhsAAAAASUVORK5CYII=) 2x);
+            position: relative;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #suggestions-list a {
+            color: var(--google-blue-600);
+        }
+
+        #suggestions-list p {
+            margin-block-end: 0;
+        }
+
+        #suggestions-list ul {
+            margin-top: 0;
+        }
+
+        #sub-frame-error-details {
+
+            color: #8F8F8F;
+
+            /* Not done on mobile for performance reasons. */
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+
+        }
+
+        @-webkit-keyframes show-snackbar {
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @-webkit-keyframes hide-snackbar {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(90px);
+            }
+        }
+
+        /* Decrease padding at low sizes. */
+        @media (max-width: 640px),
+        (max-height: 640px) {
+            h1 {
+                margin: 0 0 15px;
+            }
+        }
+
+        /* Don't allow overflow when in a subframe. */
+
+        #sub-frame-error {
+            -webkit-align-items: center;
+            -webkit-flex-flow: column;
+            -webkit-justify-content: center;
+            background-color: #DDD;
+            display: -webkit-flex;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            text-align: center;
+            top: 0;
+            transition: background-color 200ms ease-in-out;
+            width: 100%;
+        }
+
+        #sub-frame-error:hover {
+            background-color: #EEE;
+        }
+
+        #sub-frame-error-details {
+            margin: 0 10px;
+            text-align: center;
+            opacity: 0;
+        }
+
+        /* Show details only when hovering. */
+        #sub-frame-error:hover #sub-frame-error-details {
+            opacity: 1;
+        }
+
+        /* If the iframe is too small, always hide the error code. */
+        /* TODO(mmenke): See if overflow: no-display works better, once supported. */
+        @media (max-width: 200px),
+        (max-height: 95px) {
+            #sub-frame-error-details {
+                display: none;
+            }
+        }
+
+        .suggested-right>#control-buttons {
+            float: right;
+        }
+
+        #buttons::after {
+            clear: both;
+            content: '';
+            display: block;
+            width: 100%;
+        }
+
+        .offline {
+            transition: filter 1.5s cubic-bezier(0.65, 0.05, 0.36, 1),
+                will-change: filter, background-color;
+        }
+
+        .offline #main-message>p {
+            display: none;
+        }
+
+        .offline .interstitial-wrapper {
+            color: var(--text-color);
+            font-size: 1em;
+            line-height: 1.55;
+            margin: 0 auto;
+            max-width: 600px;
+            padding-top: 100px;
+            position: relative;
+            width: 100%;
+        }
+
+        .offline .runner-container {
+            direction: ltr;
+            height: 150px;
+            max-width: 600px;
+            overflow: hidden;
+            position: absolute;
+            top: 35px;
+            width: 44px;
+        }
+
+        .offline .runner-container:focus {
+            outline: none;
+        }
+
+        .offline .runner-container:focus-visible {
+            outline: 3px solid var(--google-blue-300);
+        }
+
+        .offline .runner-canvas {
+            height: 150px;
+            max-width: 600px;
+            opacity: 1;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            z-index: 10;
+        }
+
+        #offline-resources {
+            display: none;
+        }
+
+        .offline-runner-live-region {
+            bottom: 0;
+            clip-path: polygon(0 0, 0 0, 0 0);
+            color: var(--background-color);
+            display: block;
+            font-size: xx-small;
+            overflow: hidden;
+            position: absolute;
+            text-align: center;
+            transition: color 1.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+            user-select: none;
+        }
+
+        /* Custom toggle */
+        .slow-speed-option {
+            align-items: center;
+            background: var(--google-gray-50);
+            border-radius: 24px/50%;
+            bottom: 0;
+            color: var(--error-code-color);
+            display: inline-flex;
+            font-size: 1em;
+            left: 0;
+            line-height: 1.1em;
+            margin: 5px auto;
+            padding: 2px 12px 3px 20px;
+            position: absolute;
+            right: 0;
+            width: max-content;
+            z-index: 999;
+        }
+
+        .slow-speed-option.hidden {
+            display: none;
+        }
+
+        .slow-speed-option [type=checkbox] {
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+        }
+
+        .slow-speed-option .slow-speed-toggle {
+            cursor: pointer;
+            margin-inline-start: 8px;
+            padding: 8px 4px;
+            position: relative;
+        }
+
+        .slow-speed-option [type=checkbox]:disabled~.slow-speed-toggle {
+            cursor: default;
+        }
+
+        .slow-speed-option .slow-speed-toggle::before,
+        .slow-speed-option .slow-speed-toggle::after {
+            content: '';
+            display: block;
+            margin: 0 3px;
+            transition: all 100ms cubic-bezier(0.4, 0, 1, 1);
+        }
+
+        .slow-speed-option .slow-speed-toggle::before {
+            background: rgb(189, 193, 198);
+            border-radius: 0.65em;
+            height: 0.9em;
+            width: 2em;
+        }
+
+        .slow-speed-option .slow-speed-toggle::after {
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 40%);
+            height: 1.2em;
+            position: absolute;
+            top: 51%;
+            transform: translate(-20%, -50%);
+            width: 1.1em;
+        }
+
+        .slow-speed-option [type=checkbox]:focus+.slow-speed-toggle {
+            box-shadow: 0 0 8px rgb(94, 158, 214);
+            outline: 1px solid rgb(93, 157, 213);
+        }
+
+        .slow-speed-option [type=checkbox]:checked+.slow-speed-toggle::before {
+            background: var(--google-blue-600);
+            opacity: 0.5;
+        }
+
+        .slow-speed-option [type=checkbox]:checked+.slow-speed-toggle::after {
+            background: var(--google-blue-600);
+            transform: translate(calc(2em - 90%), -50%);
+        }
+
+        .slow-speed-option [type=checkbox]:checked:disabled+.slow-speed-toggle::before {
+            background: rgb(189, 193, 198);
+        }
+
+        .slow-speed-option [type=checkbox]:checked:disabled+.slow-speed-toggle::after {
+            background: var(--google-gray-50);
+        }
+
+        @media (max-width: 420px) {
+
+
+            .suggested-right>#control-buttons {
+                float: none;
+            }
+        }
+
+        @media (max-height: 350px) {
+            h1 {
+                margin: 0 0 15px;
+            }
+
+            .icon-offline {
+                margin: 0 0 10px;
+            }
+
+            .interstitial-wrapper {
+                margin-top: 5%;
+            }
+
+            .nav-wrapper {
+                margin-top: 30px;
+            }
+        }
+
+        @media (min-width: 420px) and (max-width: 736px) and (min-height: 240px) and (max-height: 420px) and (orientation:landscape) {
+            .interstitial-wrapper {
+                margin-bottom: 100px;
+            }
+        }
+
+        @media (max-width: 360px) and (max-height: 480px) {
+            .offline .interstitial-wrapper {
+                padding-top: 60px;
+            }
+
+            .offline .runner-container {
+                top: 8px;
+            }
+        }
+
+        @media (min-height: 240px) and (orientation: landscape) {
+            .offline .interstitial-wrapper {
+                margin-bottom: 90px;
+            }
+
+            .icon-offline {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-height: 320px) and (orientation: landscape) {
+            .icon-offline {
+                margin-bottom: 0;
+            }
+
+            .offline .runner-container {
+                top: 10px;
+            }
+        }
+
+        @media (max-width: 240px) {
+
+            .interstitial-wrapper {
+                overflow: inherit;
+                padding: 0 8px;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .icon {
+                filter: invert(1);
+            }
+
+            .offline .runner-canvas {
+                filter: invert(1);
+            }
+
+            #suggestions-list a {
+                color: var(--link-color);
+            }
+
+            .slow-speed-option {
+                background: var(--google-gray-800);
+                color: var(--google-gray-100);
+            }
+
+            .slow-speed-option .slow-speed-toggle::before,
+            .slow-speed-option [type=checkbox]:checked:disabled+.slow-speed-toggle::before {
+                background: rgb(189, 193, 198);
+            }
+
+            .slow-speed-option [type=checkbox]:checked+.slow-speed-toggle::after,
+            .slow-speed-option [type=checkbox]:checked+.slow-speed-toggle::before {
+                background: var(--google-blue-300);
+            }
+        }
+
+        #main-frame-error:not(.showing-details) #details {
+            display: none;
+        }
+
+        .video-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: none;
+            overflow: hidden;
+            max-height: 470px;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(20%) scale(1.4);
+        }
+
+        .content-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            color: var(--text-color);
+            font-family: inherit;
+            display: none;
+        }
+
+        .rickroll-content h1 {
+            color: var(--heading-color);
+            font-size: 1.6em;
+            font-weight: normal;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .rickroll-content h2 {
+            color: var(--heading-color);
+            font-size: 1.3em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .rickroll-content p {
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .rickroll-content ul,
+        .rickroll-content ol {
+            margin-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        .rickroll-content li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: var(--error-code-color);
+        }
+
+        .fake-link {
+            color: var(--link-color);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .fake-link:hover {
+            text-decoration: none;
+        }
+
+        .dino-speech-bubble .fake-link {
+            color: inherit;
+            font-weight: bold;
+        }
+
+        .airplane-mode-container * {
+            box-sizing: border-box;
+        }
+
+        .airplane-mode-container {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .airplane-mode-container h1 {
+            color: #c0392b;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .airplane-mode-container .message-container {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .airplane-mode-container .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        .important-link,
+        .unimportant-link {
+            text-decoration: underline;
+        }
+
+        .important-link:hover,
+        .unimportant-link:hover {
+            text-decoration: none;
+        }
+
+        .unimportant-link {
+            color: #333;
+        }
+
+        .dino-speech-bubble {
+            transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dino-speech-bubble[class]:before {
+            transition: border-color 0.3s ease !important;
+            border-left: 1rem solid var(--speech-bubble-background-color);
+        }
+
+        .dino-speech-bubble:after {
+            transition: background-color 0.3s ease !important;
+        }
+    </style>
+    <template data-sxg-only>
+        <link rel="preload" href="part00.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part01.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part02.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part03.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part04.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part05.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part06.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part07.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part08.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part09.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part10.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part11.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part12.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part13.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part14.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part15.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part16.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part17.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="part18.gif" as="fetch" crossorigin="anonymous">
+        <link rel="preload" href="/sxg/resolve-status.js" as="script">
+    </template>
 </head>
 
 <body class="neterror" style="font-family: &quot;sans&quot;, Arial, sans-serif; font-size: 75%">
-<div style="display: none;" id="content">
-  <div id="main-frame-error" class="interstitial-wrapper ">
-    <div id="main-content">
-      <div class="icon icon-offline"></div>
-      <div class="dino-speech-bubble">
-        You think you're offline?<br>
-        Then <span id="rickroll-link" class="fake-link">this link</span> won't work, right?<br>
-      </div>
-      <div id="main-message">
-        <h1>
-          <span>No internet</span>
-        </h1>
-        <p>No internet</p>
-        <div id="suggestions-list">
-          <p>Try:</p>
-          <ul class="">
-            <li>Checking the network cables, modem, and router</li>
-            <li>Reconnecting to Wi-Fi</li>
-          </ul>
+    <div style="display: none;" id="content">
+        <div id="main-frame-error" class="interstitial-wrapper ">
+            <div id="main-content">
+                <div class="icon icon-offline"></div>
+                <div class="dino-speech-bubble">
+                    You think you're offline?<br>
+                    Then <span id="rickroll-link" class="fake-link">this link</span> won't work, right?<br>
+                </div>
+                <div id="main-message">
+                    <h1>
+                        <span>No internet</span>
+                    </h1>
+                    <p>No internet</p>
+                    <div id="suggestions-list">
+                        <p>Try:</p>
+                        <ul class="">
+                            <li>Checking the network cables, modem, and router</li>
+                            <li>Reconnecting to Wi-Fi</li>
+                        </ul>
+                    </div>
+                    <div class="error-code">ERR_INTERNET_DISCONNECTED</div>
+                </div>
+            </div>
+            <div id="buttons" class="nav-wrapper suggested-right">
+                <div id="control-buttons" hidden="">
+                </div>
+            </div>
+            <div id="details">
+            </div>
+            <div role="application" tabindex="0"
+                title="Dino game. A pixelated dinosaur dodges cacti and pterodactyls as it runs across a desolate landscape. When you hear an audio cue, press space to jump over obstacles."
+                aria-label="Dino game, press space to play" class="runner-container"><canvas class="runner-canvas"
+                    width="1104" height="300" style="width: 552px; height: 150px;"></canvas><span
+                    class="offline-runner-live-region" aria-live="assertive"></span></div><label
+                class="slow-speed-option hidden">Start slower<input type="checkbox" title="Start slower" tabindex="0"
+                    checked="checked"><span class="slow-speed-toggle"></span></label>
         </div>
-        <div class="error-code">ERR_INTERNET_DISCONNECTED</div>
-      </div>
+        <div id="sub-frame-error">
+            <div class="icon "></div>
+            <div id="sub-frame-error-details">No internet</div>
+        </div>
     </div>
-    <div id="buttons" class="nav-wrapper suggested-right">
-      <div id="control-buttons" hidden="">
-      </div>
+    <div class="rickroll-content">
+        <div class="video-container" id="video-container">
+            <video id="rickroll-video" loop></video>
+        </div>
+
+        <div class="content-container" id="rickroll-text">
+            <h1>Rick Astley - Never Gonna Give You Up (Even When You're Offline)</h1>
+
+            <h2>What just happened?</h2>
+            <p>You've been Rick Rolled! This classic internet prank has been around since 2007, and you're now part of
+                internet history. Congratulations!</p>
+
+            <h2>I'm offline and this video is 19 MB. How?</h2>
+            <p>
+                To understand, go back online and <a
+                    href="https://www.pawelpokrywka.com/p/stretching-google-prefetching" class="fake-link"
+                    target="_blank">read my post about it</a>. No pranks this time, I promise.
+            </p>
+
+            <div class="footer">
+                <p>Made with ❤️ for demonstration purposes</p>
+            </div>
+        </div>
     </div>
-    <div id="details">
+    <div style="display: none;" id="online-content" class="airplane-mode-container">
+        <h1>Go offline — you don't need internet anymore! CODE: 0925</h1>
+
+        <div class="message-container">
+            <p>The page loaded normally. That's not surprising because you are online.</p>
+            <p>Please close this window and start from the beginning. Remember to enable airplane mode when asked.</p>
+        </div>
+
+        <h2>What is Airplane Mode?</h2>
+        <p><a class="unimportant-link" href="https://en.wikipedia.org/wiki/Airplane_mode">Airplane mode</a> is a setting
+            available on smartphones, tablets, laptops, and other wireless devices that disables all wireless
+            communications, allowing you to go completely offline. This includes cellular networks, Wi-Fi, Bluetooth,
+            and sometimes GPS—effectively disconnecting you from the internet.</p>
+
+        <h2>How to Toggle Airplane Mode and Go Offline</h2>
+        <p>Turning airplane mode on or off to disconnect from the internet varies by device. Here are the general steps
+            for different platforms:</p>
+        <ul>
+            <li><strong>Android:</strong> Swipe down from the top to access Quick Settings and tap the airplane icon to
+                go offline.</li>
+            <li><strong>iPhone/iPad:</strong> Open Control Center by swiping down (iPhone X and newer) or up (older
+                models), then tap the airplane icon to disconnect from the internet.</li>
+            <li><strong>Windows:</strong> Click on the network icon in the taskbar and toggle airplane mode to go
+                offline.</li>
+            <li><strong>Mac:</strong> Click on the Wi-Fi or Bluetooth menu and manually disable wireless connections
+                when you don't need internet.</li>
+        </ul>
+
+        <h2>When You Don't Need Internet: Benefits of Airplane Mode</h2>
+        <p>Going offline with airplane mode is useful in several scenarios:</p>
+        <ul>
+            <li><strong>During Flights:</strong> It complies with airline regulations by disabling signals that might
+                interfere with aircraft communication.</li>
+            <li><strong>To Save Battery:</strong> Disabling wireless connections and going offline can significantly
+                extend battery life when you don't need internet.</li>
+            <li><strong>To Avoid Distractions:</strong> It prevents incoming calls, messages, and notifications—perfect
+                when you need to focus without internet distractions.</li>
+            <li><strong>To Troubleshoot Connectivity Issues:</strong> Toggling airplane mode can help reset network
+                connections when your internet is acting up.</li>
+            <li><strong>Digital Detox:</strong> Sometimes you just don't need internet—going offline can improve mental
+                wellbeing and reduce screen time.</li>
+        </ul>
+
+        <h2>Living Offline: Making the Most of Airplane Mode</h2>
+        <p>Even when you go offline, there are plenty of activities you can enjoy without needing an internet
+            connection:</p>
+        <ul>
+            <li>Reading downloaded books or documents</li>
+            <li>Playing offline games</li>
+            <li>Writing or journaling</li>
+            <li>Listening to downloaded music</li>
+            <li>Taking photos (just without uploading them)</li>
+        </ul>
+        <div class="footer">
+            <p>Made with ❤️ for demonstration purposes</p>
+        </div>
+
     </div>
-    <div role="application" tabindex="0"
-         title="Dino game. A pixelated dinosaur dodges cacti and pterodactyls as it runs across a desolate landscape. When you hear an audio cue, press space to jump over obstacles."
-         aria-label="Dino game, press space to play" class="runner-container"><canvas class="runner-canvas"
-                                                                                      width="1104" height="300" style="width: 552px; height: 150px;"></canvas><span
-      class="offline-runner-live-region" aria-live="assertive"></span></div><label
-    class="slow-speed-option hidden">Start slower<input type="checkbox" title="Start slower" tabindex="0"
-                                                        checked="checked"><span class="slow-speed-toggle"></span></label>
-  </div>
-  <div id="sub-frame-error">
-    <div class="icon "></div>
-    <div id="sub-frame-error-details">No internet</div>
-  </div>
-</div>
-<div class="rickroll-content">
-  <div class="video-container" id="video-container">
-    <video id="rickroll-video" loop></video>
-  </div>
 
-  <div class="content-container" id="rickroll-text">
-    <h1>Rick Astley - Never Gonna Give You Up (Even When You're Offline)</h1>
+    <script data-issxg-var="true">window.isSXG = false</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const speechBubble = document.querySelector('.dino-speech-bubble');
+            const offlineContent = document.getElementById('content');
+            const rickrollVideo = document.getElementById('video-container');
+            const rickrollText = document.getElementById('rickroll-text');
+            const rickrollLink = document.getElementById('rickroll-link');
 
-    <h2>What just happened?</h2>
-    <p>You've been Rick Rolled! This classic internet prank has been around since 2007, and you're now part of
-      internet history. Congratulations!</p>
+            let bubbleShown = false;
+            let userInteracted = false;
 
-    <h2>I'm offline and this video is 19 MB. How?</h2>
-    <p>
-      To understand, go back online and <a href="https://www.pawelpokrywka.com/p/stretching-google-prefetching" class="fake-link" target="_blank">read my post about it</a>. No pranks this time, I promise.
-    </p>
+            function showBubbleWithDelay() {
+                if (!bubbleShown) {
+                    setTimeout(function () {
+                        speechBubble.classList.add('show');
+                        bubbleShown = true;
+                        setTimeout(animateSpeechBubble, 500);
+                    }, 500);
+                }
+            }
 
-    <div class="footer">
-      <p>Made with ❤️ for demonstration purposes</p>
-    </div>
-  </div>
-</div>
-<div style="display: none;" id="online-content" class="airplane-mode-container">
-  <h1>Go offline — you don't need internet anymore! CODE: 0925</h1>
+            async function fetchAndConcatBlobs() {
+                const urls = Array.from({ length: 19 }, (_, i) => `part${(i).toString().padStart(2, '0')}.gif`);
+                const responses = await Promise.all(urls.map(url => fetch(url)));
+                const buffers = await Promise.all(responses.map(res => res.arrayBuffer()));
 
-  <div class="message-container">
-    <p>The page loaded normally. That's not surprising because you are online.</p>
-    <p>Please close this window and start from the beginning. Remember to enable airplane mode when asked.</p>
-  </div>
+                const totalLength = buffers.reduce((acc, buf) => acc + buf.byteLength, 0);
+                const concatenated = new Uint8Array(totalLength);
+                let offset = 0;
+                buffers.forEach(buf => {
+                    concatenated.set(new Uint8Array(buf), offset);
+                    offset += buf.byteLength;
+                });
 
-  <h2>What is Airplane Mode?</h2>
-  <p><a class="unimportant-link" href="https://en.wikipedia.org/wiki/Airplane_mode">Airplane mode</a> is a setting available on smartphones, tablets, laptops, and other wireless devices that disables all wireless communications, allowing you to go completely offline. This includes cellular networks, Wi-Fi, Bluetooth, and sometimes GPS—effectively disconnecting you from the internet.</p>
+                const blob = new Blob([concatenated], { type: 'video/mp4' });
+                const videoUrl = URL.createObjectURL(blob);
 
-  <h2>How to Toggle Airplane Mode and Go Offline</h2>
-  <p>Turning airplane mode on or off to disconnect from the internet varies by device. Here are the general steps for different platforms:</p>
-  <ul>
-    <li><strong>Android:</strong> Swipe down from the top to access Quick Settings and tap the airplane icon to go offline.</li>
-    <li><strong>iPhone/iPad:</strong> Open Control Center by swiping down (iPhone X and newer) or up (older models), then tap the airplane icon to disconnect from the internet.</li>
-    <li><strong>Windows:</strong> Click on the network icon in the taskbar and toggle airplane mode to go offline.</li>
-    <li><strong>Mac:</strong> Click on the Wi-Fi or Bluetooth menu and manually disable wireless connections when you don't need internet.</li>
-  </ul>
+                const videoElement = document.getElementById('rickroll-video');
+                if (videoElement) {
+                    videoElement.src = videoUrl;
+                    videoElement.play();
+                } else {
+                    console.error('Video element not found!');
+                }
+            }
 
-  <h2>When You Don't Need Internet: Benefits of Airplane Mode</h2>
-  <p>Going offline with airplane mode is useful in several scenarios:</p>
-  <ul>
-    <li><strong>During Flights:</strong> It complies with airline regulations by disabling signals that might interfere with aircraft communication.</li>
-    <li><strong>To Save Battery:</strong> Disabling wireless connections and going offline can significantly extend battery life when you don't need internet.</li>
-    <li><strong>To Avoid Distractions:</strong> It prevents incoming calls, messages, and notifications—perfect when you need to focus without internet distractions.</li>
-    <li><strong>To Troubleshoot Connectivity Issues:</strong> Toggling airplane mode can help reset network connections when your internet is acting up.</li>
-    <li><strong>Digital Detox:</strong> Sometimes you just don't need internet—going offline can improve mental wellbeing and reduce screen time.</li>
-  </ul>
+            function empowerDino() {
+                setTimeout(function () {
+                    if (!bubbleShown) showBubbleWithDelay();
+                }, 3000);
 
-  <h2>Living Offline: Making the Most of Airplane Mode</h2>
-  <p>Even when you go offline, there are plenty of activities you can enjoy without needing an internet connection:</p>
-  <ul>
-    <li>Reading downloaded books or documents</li>
-    <li>Playing offline games</li>
-    <li>Writing or journaling</li>
-    <li>Listening to downloaded music</li>
-    <li>Taking photos (just without uploading them)</li>
-  </ul>
-  <div class="footer">
-    <p>Made with ❤️ for demonstration purposes</p>
-  </div>
+                const interactionEvents = ['mousemove', 'click', 'touchstart', 'scroll', 'keydown'];
+                interactionEvents.forEach(function (eventType) {
+                    document.addEventListener(eventType, function () {
+                        if (!userInteracted) {
+                            userInteracted = true;
+                            showBubbleWithDelay();
+                        }
+                    }, { once: true });
+                });
+            }
 
-</div>
+            function loadCanary() {
+                const script = document.createElement('script');
+                script.src = '/sxg/resolve-status.js';
+                document.head.appendChild(script);
+            }
 
-<script data-issxg-var="true">window.isSXG = false</script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const speechBubble = document.querySelector('.dino-speech-bubble');
-    const offlineContent = document.getElementById('content');
-    const rickrollVideo = document.getElementById('video-container');
-    const rickrollText = document.getElementById('rickroll-text');
-    const rickrollLink = document.getElementById('rickroll-link');
+            async function checkInternet(timeout = 3000) {
+                const controller = new AbortController();
+                const signal = controller.signal;
 
-    let bubbleShown = false;
-    let userInteracted = false;
+                const url = "/sxg/resolve-status.js";
 
-    function showBubbleWithDelay() {
-      if (!bubbleShown) {
-        setTimeout(function () {
-          speechBubble.classList.add('show');
-          bubbleShown = true;
-          setTimeout(animateSpeechBubble, 500);
-        }, 500);
-      }
-    }
+                const timeoutId = setTimeout(() => controller.abort(), timeout);
 
-    async function fetchAndConcatBlobs() {
-      const urls = Array.from({ length: 19 }, (_, i) => `part${(i).toString().padStart(2, '0')}.gif`);
-      const responses = await Promise.all(urls.map(url => fetch(url)));
-      const buffers = await Promise.all(responses.map(res => res.arrayBuffer()));
+                try {
+                    const response = await fetch(url, { method: "POST", signal });
 
-      const totalLength = buffers.reduce((acc, buf) => acc + buf.byteLength, 0);
-      const concatenated = new Uint8Array(totalLength);
-      let offset = 0;
-      buffers.forEach(buf => {
-        concatenated.set(new Uint8Array(buf), offset);
-        offset += buf.byteLength;
-      });
+                    clearTimeout(timeoutId);
 
-      const blob = new Blob([concatenated], { type: 'video/mp4' });
-      const videoUrl = URL.createObjectURL(blob);
+                    return true;
+                } catch (error) {
+                    return false; // No internet or request timed out
+                }
+            }
 
-      const videoElement = document.getElementById('rickroll-video');
-      if (videoElement) {
-        videoElement.src = videoUrl;
-        videoElement.play();
-      } else {
-        console.error('Video element not found!');
-      }
-    }
+            function showOnline() {
+                document.title = "Go offline — you don't need internet anymore! CODE: 0925";
+                document.getElementById("content").style.display = 'none';
+                document.body.style.backgroundColor = 'white';
+                document.getElementById("online-content").style.display = 'block';
+            }
 
-    function empowerDino() {
-      setTimeout(function () {
-        if (!bubbleShown) showBubbleWithDelay();
-      }, 3000);
+            function showNormalDino() {
+                document.title = 'Offline';
+                document.getElementById("online-content").style.display = 'none';
+                document.body.style.backgroundColor = '';
+                document.getElementById("content").style.display = 'block';
+            }
 
-      const interactionEvents = ['mousemove', 'click', 'touchstart', 'scroll', 'keydown'];
-      interactionEvents.forEach(function (eventType) {
-        document.addEventListener(eventType, function () {
-          if (!userInteracted) {
-            userInteracted = true;
-            showBubbleWithDelay();
-          }
-        }, { once: true });
-      });
-    }
+            function showFullDino() {
+                showNormalDino();
 
-    function loadCanary() {
-      const script = document.createElement('script');
-      script.src = '/sxg/resolve-status.js';
-      document.head.appendChild(script);
-    }
+                if (window.isSXG) {
+                    document.addEventListener('SxgStatusResolved', function (e) {
+                        if (e.detail.subresources) empowerDino();
+                    });
+                    loadCanary();
 
-    async function checkInternet(timeout = 3000) {
-      const controller = new AbortController();
-      const signal = controller.signal;
+                    rickrollLink.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        offlineContent.style.display = 'none';
+                        rickrollVideo.style.display = 'block';
+                        rickrollText.style.display = 'block';
 
-      const url = "/sxg/resolve-status.js";
+                        document.getElementById('rickroll-video').play();
+                        document.title = 'You got Rick Rolled';
 
-      const timeoutId = setTimeout(() => controller.abort(), timeout);
+                        fetchAndConcatBlobs();
+                    });
+                }
+            }
 
-      try {
-          const response = await fetch(url, {method: "POST", signal});
+            function connectionStateCheck(callbacks) {
+                if (!navigator.onLine) return callbacks.offline();
 
-          clearTimeout(timeoutId);
+                let resolved = false;
 
-          return true;
-      } catch (error) {
-          return false; // No internet or request timed out
-      }
-    }
+                setTimeout(() => {
+                    if (!resolved) callbacks.maybe();
+                }, 1500);
 
-    function showOnline() {
-      document.title = "Go offline — you don't need internet anymore! CODE: 0925";
-      document.getElementById("content").style.display = 'none';
-      document.body.style.backgroundColor = 'white';
-      document.getElementById("online-content").style.display = 'block';
-    }
+                checkInternet(4000).then(isConnected => {
+                    resolved = true;
+                    isConnected ? callbacks.online() : callbacks.offline();
+                });
+            }
 
-    function showNormalDino() {
-      document.title = 'Offline';
-      document.getElementById("online-content").style.display = 'none';
-      document.body.style.backgroundColor = '';
-      document.getElementById("content").style.display = 'block';
-    }
+            function animateSpeechBubble() {
+                const speechBubble = document.querySelector('.dino-speech-bubble');
+                if (!speechBubble) return;
 
-    function showFullDino() {
-      showNormalDino();
+                const rule = Array.prototype.slice.call(document.styleSheets[0].cssRules).find((item) => { return item.selectorText && item.selectorText.indexOf('bubble[class]') !== -1 });
 
-      if (window.isSXG) {
-        document.addEventListener('SxgStatusResolved', function(e) {
-          if (e.detail.subresources) empowerDino();
+                let hue = 0;
+
+                function updateColors() {
+                    const backgroundColor = `hsl(${hue}, 80%, 70%)`;
+
+                    const brightness = hue % 360;
+                    const textColor = (brightness > 45 && brightness < 200) ? 'hsl(0, 0%, 10%)' : 'hsl(0, 0%, 98%)';
+
+                    speechBubble.style.backgroundColor = backgroundColor;
+                    speechBubble.style.color = textColor;
+                    rule.style.borderLeftColor = backgroundColor;
+
+                    hue = (hue + 1) % 360;
+
+                    requestAnimationFrame(updateColors);
+                }
+
+                updateColors();
+            }
+
+            connectionStateCheck({ maybe: showNormalDino, online: showOnline, offline: showFullDino })
         });
-        loadCanary();
-
-        rickrollLink.addEventListener('click', function (e) {
-          e.preventDefault();
-          offlineContent.style.display = 'none';
-          rickrollVideo.style.display = 'block';
-          rickrollText.style.display = 'block';
-
-          document.getElementById('rickroll-video').play();
-          document.title = 'You got Rick Rolled';
-
-          fetchAndConcatBlobs();
-        });
-      }
-    }
-
-    function connectionStateCheck(callbacks) {
-      if (!navigator.onLine) return callbacks.offline();
-
-      let resolved = false;
-
-      setTimeout(() => {
-        if (!resolved) callbacks.maybe();
-      }, 1500);
-
-      checkInternet(4000).then(isConnected => {
-        resolved = true;
-        isConnected ? callbacks.online() : callbacks.offline();
-      });
-    }
-
-    function animateSpeechBubble() {
-      const speechBubble = document.querySelector('.dino-speech-bubble');
-      if (!speechBubble) return;
-
-      const rule = Array.prototype.slice.call(document.styleSheets[0].cssRules).find((item) => { return item.selectorText && item.selectorText.indexOf('bubble[class]') !== -1 });
-
-      let hue = 0;
-
-      function updateColors() {
-        const backgroundColor = `hsl(${hue}, 80%, 70%)`;
-
-        const brightness = hue % 360;
-        const textColor = (brightness > 45 && brightness < 200) ? 'hsl(0, 0%, 10%)' : 'hsl(0, 0%, 98%)';
-
-        speechBubble.style.backgroundColor = backgroundColor;
-        speechBubble.style.color = textColor;
-        rule.style.borderLeftColor = backgroundColor;
-
-        hue = (hue + 1) % 360;
-
-        requestAnimationFrame(updateColors);
-      }
-
-      updateColors();
-    }
-
-    connectionStateCheck({maybe: showNormalDino, online: showOnline, offline: showFullDino})
-  });
-</script>
+    </script>
 </body>
 
 </html>
