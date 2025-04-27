@@ -44,8 +44,8 @@
 
         body {
             --background-color: #fff;
-            --speech-bubble-background-color: rgb(140, 255, 140);
-            --speech-bubble-text-color: rgb(0, 100, 0);
+            --speech-bubble-background-color: hsl(120, 80%, 85%);
+            --speech-bubble-text-color: rgb(0, 0, 0);
             --error-code-color: var(--google-gray-700);
             --google-blue-50: rgb(232, 240, 254);
             --google-blue-100: rgb(210, 227, 252);
@@ -95,8 +95,8 @@
         @media (prefers-color-scheme: dark) {
             body {
                 --background-color: var(--google-gray-900);
-                --speech-bubble-background-color: rgb(0, 100, 0);
-                --speech-bubble-text-color: rgb(140, 255, 140);
+                --speech-bubble-background-color: hsl(120, 80%, 25%);
+                --speech-bubble-text-color: rgb(255, 255, 255);
                 --error-code-color: var(--google-gray-500);
                 --heading-color: var(--google-gray-500);
                 --link-color: var(--google-blue-300);
@@ -1296,19 +1296,19 @@
 
                 const rule = Array.prototype.slice.call(document.styleSheets[0].cssRules).find((item) => { return item.selectorText && item.selectorText.indexOf('bubble[class]') !== -1 });
 
-                let hue = 0;
+                let hue = 120;
+
+                const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
                 function updateColors() {
-                    const backgroundColor = `hsl(${hue}, 80%, 70%)`;
+                    const backgroundColor = `hsl(${hue}, 80%, ${isDarkMode ? 25 : 85}%)`;
 
                     const brightness = hue % 360;
-                    const textColor = (brightness > 45 && brightness < 200) ? 'hsl(0, 0%, 10%)' : 'hsl(0, 0%, 98%)';
 
                     speechBubble.style.backgroundColor = backgroundColor;
-                    speechBubble.style.color = textColor;
                     rule.style.borderLeftColor = backgroundColor;
 
-                    hue = (hue + 1) % 360;
+                    hue = (hue + 2) % 360;
 
                     requestAnimationFrame(updateColors);
                 }
