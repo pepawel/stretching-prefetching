@@ -83,6 +83,14 @@ You can use any file that's no larger than the limit. Potential ideas:
 - A compressed archive containing an entire web application, uncompressed later by the browser
 - An executable for the user to download
 
+### Why is original Google Chrome required?
+
+SXG is supported in the Blink browser engine, so theoretically all Chromium-based browsers should handle it. However, some of them like Brave, Vanadium, and potentially others don't. Therefore, it is recommended to use original Google Chrome.
+
+### Why doesn't it work on iOS?
+
+Chrome on iOS uses the WebKit engine, which doesn't support SXG.
+
 ## Installation & Usage
 
 To deploy the demo to your server, follow these steps:
